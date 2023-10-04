@@ -13,6 +13,7 @@ namespace Reflection
         public string Address { get; set; }
         public int RegNo { get; set; }
         private string Phone { get; set; }
+        private string sex = "Male/Female";
 
         public Student(int id, string name, string address, int regno, string phone)
         {
@@ -29,5 +30,14 @@ namespace Reflection
             return "ID: " + Id + " Name: " + Name + " Address: " + Address + " Registration Number: " + RegNo;
 
         }
+        public string GetPhone()
+        {
+            return Phone;
+        }
+        private void GetSex()
+        {
+            Console.WriteLine(sex);
+        }
+        public void GetAddress() { }
     }
 }
