@@ -1,4 +1,4 @@
-﻿using Reflection;
+﻿/*using Reflection;
 using System.Reflection;
 
 Student student = new Student(1, "JON", "NL, 4521", 10029, "017013015018019");
@@ -47,4 +47,7 @@ foreach (var getFieldInfo in getFields)
 {
     Console.WriteLine(getFieldInfo.Name);
     Console.WriteLine(getFieldInfo.FieldType);
-}
+}*/
+
+
+Console.WriteLine();
