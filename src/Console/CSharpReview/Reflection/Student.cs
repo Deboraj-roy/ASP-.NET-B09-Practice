@@ -38,6 +38,6 @@ namespace Reflection
         {
             Console.WriteLine(sex);
         }
-        public void GetAddress() { }
+        public void GetAddressTest() { }
     }
 }
