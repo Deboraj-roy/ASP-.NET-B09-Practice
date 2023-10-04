@@ -49,5 +49,62 @@ foreach (var getFieldInfo in getFields)
     Console.WriteLine(getFieldInfo.FieldType);
 }*/
 
+using System.Reflection;
 
-Console.WriteLine();
+
+string dllFilePath = @"C:\Users\UseR\source\Git and GitHub\ASP-.NET-B09-Practice\src\Console\CSharpReview\PrintAll\bin\Debug\net7.0\PrintAll.dll";
+
+try
+{
+    Assembly assembly = Assembly.LoadFile(dllFilePath);
+    // Now, 'assembly' holds a reference to the loaded assembly.
+    // You can use 'assembly' to access types and members from the loaded DLL.
+
+
+    Console.WriteLine(assembly.GetType());
+
+    Console.WriteLine("==================================");
+
+    foreach (var type in assembly.GetTypes())
+    {
+        Console.WriteLine($"Type: {type.Name}");
+
+        Console.WriteLine("==================================");
+
+        ///Field
+
+        foreach (var field in type.GetFields(BindingFlags.NonPublic |
+            BindingFlags.Instance |
+            BindingFlags.DeclaredOnly))
+        {
+            Console.WriteLine($"Field: {field.Name}");
+        }
+        Console.WriteLine("==================================");
+
+
+        foreach (var method in type.GetMethods(BindingFlags.Public |
+            BindingFlags.Instance |
+            BindingFlags.DeclaredOnly))
+        {
+            Console.WriteLine($"Method: {method.Name}");
+        }
+        Console.WriteLine("==================================");
+
+
+        foreach (var property in type.GetProperties())
+        {
+            Console.WriteLine($"Property: {property.Name}");
+        }
+
+    }
+
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"Error loading assembly: {ex.Message}");
+}
+
+
+// var assembly = Assembly.LoadFrom(@"D:\PrintAll.dll");
+
+
