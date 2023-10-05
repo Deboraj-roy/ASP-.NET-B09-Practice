@@ -52,7 +52,7 @@ foreach (var getFieldInfo in getFields)
 using System.Reflection;
 
 
-string dllFilePath = @"C:\Users\UseR\source\Git and GitHub\ASP-.NET-B09-Practice\src\Console\CSharpReview\PrintAll\bin\Debug\net7.0\PrintAll.dll";
+string dllFilePath = @"C:\Users\UseR\source\Git and GitHub\Files\reflection-demo-master\PrintAll\bin\Debug\netcoreapp3.1\PrintAll.dll";
 
 try
 {
