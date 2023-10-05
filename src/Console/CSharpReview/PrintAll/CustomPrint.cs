@@ -11,12 +11,12 @@
 
         public string GetName()
         {
-            return name;
+            return this.name;
         }
 
         public void PrintName()
         {
-            Console.WriteLine($"Name set as {name}");
+            Console.WriteLine($"Name set as {this.name}");
         }
 
         public void Print(string name)

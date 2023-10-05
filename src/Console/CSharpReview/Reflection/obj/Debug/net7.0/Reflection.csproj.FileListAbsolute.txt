@@ -7,3 +7,9 @@ C:\Users\UseR\source\Git and GitHub\ASP-.NET-B09-Practice\src\Console\CSharpRevi
 C:\Users\UseR\source\Git and GitHub\ASP-.NET-B09-Practice\src\Console\CSharpReview\Reflection\obj\Debug\net7.0\Reflection.dll
 C:\Users\UseR\source\Git and GitHub\ASP-.NET-B09-Practice\src\Console\CSharpReview\Reflection\obj\Debug\net7.0\refint\Reflection.dll
 C:\Users\UseR\source\Git and GitHub\ASP-.NET-B09-Practice\src\Console\CSharpReview\Reflection\obj\Debug\net7.0\Reflection.pdb
+C:\Users\UseR\source\Git and GitHub\ASP-.NET-B09-Practice\src\Console\CSharpReview\Reflection\bin\Debug\net7.0\Reflection.deps.json
+C:\Users\UseR\source\Git and GitHub\ASP-.NET-B09-Practice\src\Console\CSharpReview\Reflection\bin\Debug\net7.0\Reflection.runtimeconfig.json
+C:\Users\UseR\source\Git and GitHub\ASP-.NET-B09-Practice\src\Console\CSharpReview\Reflection\bin\Debug\net7.0\Reflection.dll
+C:\Users\UseR\source\Git and GitHub\ASP-.NET-B09-Practice\src\Console\CSharpReview\Reflection\bin\Debug\net7.0\Reflection.pdb
+C:\Users\UseR\source\Git and GitHub\ASP-.NET-B09-Practice\src\Console\CSharpReview\Reflection\obj\Debug\net7.0\Reflection.genruntimeconfig.cache
+C:\Users\UseR\source\Git and GitHub\ASP-.NET-B09-Practice\src\Console\CSharpReview\Reflection\obj\Debug\net7.0\ref\Reflection.dll
