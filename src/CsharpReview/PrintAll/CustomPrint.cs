@@ -1,6 +1,5 @@
 ﻿namespace PrintAll
 {
-
     public class CustomPrint
     {
         private string name;
