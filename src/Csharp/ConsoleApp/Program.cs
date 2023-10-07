@@ -1,6 +1,9 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Linq;
+using System.Reflection;
 
-var assembly = Assembly.LoadFrom(@"C:\Users\UseR\source\Git and GitHub\ASP-.NET-B09-Practice\src\Console\CSharpReview\ClassLibrary\bin\Debug\net7.0\ClassLibrary.dll");
+
+var assembly = Assembly.LoadFrom(@"C:\Users\UseR\source\Git and GitHub\ASP-.NET-B09-Practice\src\Csharp\Library\bin\Debug\net7.0\Library.dll");
 
 foreach (var type in assembly.GetTypes())
 {
