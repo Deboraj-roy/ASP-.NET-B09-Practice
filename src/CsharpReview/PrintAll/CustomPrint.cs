@@ -1,6 +1,7 @@
-﻿namespace Library
+﻿namespace PrintAll
 {
-    public class LibraryClass
+
+    public class CustomPrint
     {
         private string name;
 
