@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 class Program
@@ -108,34 +109,52 @@ public class SimpleMapper
 {
     public void Copy(object source, object destination)
     {
+        if (source == null || destination == null || source.GetType() != destination.GetType())
+        {
+            throw new ArgumentNullException("Source and destination objects cannot be null, and their types must be the same.");
+        }
+
+        CopyProperties(source, destination);
+    }
+
+    private void CopyProperties(object source, object destination)
+    {
         var sourceProps = source.GetType().GetProperties();
         var destProps = destination.GetType().GetProperties();
 
         foreach (var sourceProp in sourceProps)
         {
-            foreach (var destProp in destProps)
+            var destProp = destProps.FirstOrDefault(p => p.Name == sourceProp.Name && p.PropertyType == sourceProp.PropertyType);
+
+            var sourceValue = sourceProp.GetValue(source);
+            var destinationValue = destProp.GetValue(source);
+            if (destProp != null)
             {
-                if (sourceProp.Name == destProp.Name && sourceProp.PropertyType == destProp.PropertyType)
+                if (sourceProp.PropertyType.IsArray || sourceProp.PropertyType.GetInterface("IEnumerable") != null)
                 {
-                    if (sourceProp.PropertyType.IsArray)
-                    {
-                        var sourceArray = (Array)sourceProp.GetValue(source);
-                        var destArray = Array.CreateInstance(destProp.PropertyType.GetElementType(), sourceArray.Length);
+                    // Handle lists and arrays
+                    IEnumerable sourceList = (IEnumerable)sourceValue;
+                    IEnumerable destinationList = (IEnumerable)destinationValue;
 
-                        for (int i = 0; i < sourceArray.Length; i++)
-                        {
-                            var newObj = Activator.CreateInstance(destProp.PropertyType.GetElementType());
-                            Copy(sourceArray.GetValue(i), newObj);
-                            destArray.SetValue(newObj, i);
-                        }
+                    IEnumerator sourceEnumerator = sourceList.GetEnumerator();
+                    IEnumerator destinationEnumerator = destinationList.GetEnumerator();
 
-                        destProp.SetValue(destination, destArray);
-                    }
-                    else
+                    while (sourceEnumerator.MoveNext() && destinationEnumerator.MoveNext())
                     {
-                        destProp.SetValue(destination, sourceProp.GetValue(source));
+                        //Recursively Call nested objects
+                        CopyProperties(sourceEnumerator.Current, destinationEnumerator.Current);
                     }
-                    break;
+                }
+                else if (sourceProp.PropertyType.IsPrimitive || sourceProp.PropertyType == typeof(string))
+                {
+                    destProp.SetValue(destination, sourceProp.GetValue(source));
+                }
+                else
+                {
+                    var sourceValue1 = sourceProp.GetValue(source);
+                    var destValue1 = destProp.GetValue(destination) ?? Activator.CreateInstance(destProp.PropertyType);
+                    CopyProperties(sourceValue1, destValue1);
+                    destProp.SetValue(destination, destValue1);
                 }
             }
         }
