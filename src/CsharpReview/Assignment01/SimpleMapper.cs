@@ -11,67 +11,74 @@ namespace Assignment01
     {
         public void Copy(object source, object destination)
         {
-            if (source == null || destination == null) return;
+            if (source == null || destination == null)
+            {
+                return;
+            }
 
             var sourceType = source.GetType();
             var destinationType = destination.GetType();
 
-            // Check if the types are the same
-            if (sourceType != destinationType)
+            // Iterate through all properties of the source object
+            foreach (var sourceProperty in sourceType.GetProperties())
             {
-                throw new ArgumentException("Source and destination types must be the same.");
-            }
+                var propertyName = sourceProperty.Name;
 
-            // Get all properties of the source type
-            var properties = sourceType.GetProperties();
-
-            foreach (var property in properties)
-            {
-                // Check if the property is a simple type or a complex type
-                if (IsSimple(property.PropertyType))
+                // Check if the destination object has a matching property
+                var destinationProperty = destinationType.GetProperty(propertyName);
+                if (destinationProperty == null)
                 {
-                    var value = property.GetValue(source);
-                    var destinationProperty = destinationType.GetProperty(property.Name);
-                    if (destinationProperty != null)
-                    {
-                        destinationProperty.SetValue(destination, value);
-                    }
+                    continue;
                 }
-                else if (typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
+
+                // Check if the property types are the same
+                if (sourceProperty.PropertyType == destinationProperty.PropertyType)
                 {
-                    var sourceList = (IEnumerable)property.GetValue(source);
-                    var destinationList = (IList)Activator.CreateInstance(property.PropertyType);
+                    // Get the value from the source property
+                    var sourceValue = sourceProperty.GetValue(source);
 
-                    if (sourceList != null)
-                    {
-                        foreach (var item in sourceList)
-                        {
-                            var itemType = item.GetType();
-                            var destinationItem = Activator.CreateInstance(itemType);
-                            Copy(item, destinationItem);
-                            destinationList.Add(destinationItem);
-                        }
-
-                        var destinationProperty = destinationType.GetProperty(property.Name);
-                        if (destinationProperty != null)
-                        {
-                            destinationProperty.SetValue(destination, destinationList);
-                        }
-                    }
+                    // Copy the value to the destination property
+                    destinationProperty.SetValue(destination, sourceValue);
                 }
                 else
                 {
-                    var sourceValue = property.GetValue(source);
-                    var destinationValue = property.GetValue(destination) ?? Activator.CreateInstance(property.PropertyType);
-                    Copy(sourceValue, destinationValue);
-                    property.SetValue(destination, destinationValue);
+                    // Property types are not the same, check for nested objects or lists
+                    if (IsNestedObject(sourceProperty.PropertyType) && IsNestedObject(destinationProperty.PropertyType))
+                    {
+                        var sourceNestedObject = sourceProperty.GetValue(source);
+                        var destinationNestedObject = destinationProperty.GetValue(destination);
+
+                        // Recursively copy nested objects
+                        Copy(sourceNestedObject, destinationNestedObject);
+                    }
+                    else if (IsList(sourceProperty.PropertyType) && IsList(destinationProperty.PropertyType))
+                    {
+                        var sourceList = (IEnumerable)sourceProperty.GetValue(source);
+                        var destinationList = (IList)Activator.CreateInstance(destinationProperty.PropertyType);
+
+                        // Iterate through the list and copy each item
+                        foreach (var sourceItem in sourceList)
+                        {
+                            var destinationItem = Activator.CreateInstance(destinationProperty.PropertyType.GenericTypeArguments[0]);
+                            Copy(sourceItem, destinationItem);
+                            destinationList.Add(destinationItem);
+                        }
+
+                        // Set the copied list to the destination property
+                        destinationProperty.SetValue(destination, destinationList);
+                    }
                 }
             }
         }
 
-        private bool IsSimple(Type type)
+        private bool IsNestedObject(Type type)
         {
-            return type.IsPrimitive || type.IsValueType || type == typeof(string);
+            return type.IsClass && type != typeof(string);
+        }
+
+        private bool IsList(Type type)
+        {
+            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>);
         }
     }
 }
