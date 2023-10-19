@@ -109,16 +109,7 @@ public class SimpleMapper
 {
     public void Copy(object source, object destination)
     {
-        if (source == null || destination == null || source.GetType() != destination.GetType())
-        {
-            throw new ArgumentNullException("Source and destination objects cannot be null, and their types must be the same.");
-        }
 
-        CopyProperties(source, destination);
-    }
-
-    private void CopyProperties(object source, object destination)
-    {
         var sourceProps = source.GetType().GetProperties();
         var destProps = destination.GetType().GetProperties();
 
@@ -142,7 +133,7 @@ public class SimpleMapper
                     while (sourceEnumerator.MoveNext() && destinationEnumerator.MoveNext())
                     {
                         //Recursively Call nested objects
-                        CopyProperties(sourceEnumerator.Current, destinationEnumerator.Current);
+                        Copy(sourceEnumerator.Current, destinationEnumerator.Current);
                     }
                 }
                 else if (sourceProp.PropertyType.IsPrimitive || sourceProp.PropertyType == typeof(string))
@@ -153,10 +144,11 @@ public class SimpleMapper
                 {
                     var sourceValue1 = sourceProp.GetValue(source);
                     var destValue1 = destProp.GetValue(destination) ?? Activator.CreateInstance(destProp.PropertyType);
-                    CopyProperties(sourceValue1, destValue1);
+                    Copy(sourceValue1, destValue1);
                     destProp.SetValue(destination, destValue1);
                 }
             }
         }
     }
+ 
 }
