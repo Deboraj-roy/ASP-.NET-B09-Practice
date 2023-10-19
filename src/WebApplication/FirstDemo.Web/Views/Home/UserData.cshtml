@@ -1,0 +1,52 @@
+﻿
+@model UserClass
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Information</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th> ID </th>
+            <th> Name </th>
+            <th> Email </th>
+            <th> Password </th>
+            <th> Phone </th>
+        </tr>
+        <tr>
+            <td>@Model.Id</td>
+            <td>@Model.Name</td>
+            <td>@Model.Email</td>
+            <td>@Model.Password</td>
+            <td>@Model.Phone</td>
+        </tr>
+        <tr>
+            <td colspan="4">Mathematic Sum Function: @Model.Sum(3,8)
+            <td>
+        </tr>
+    </table>
+
+</body>
+</html>
