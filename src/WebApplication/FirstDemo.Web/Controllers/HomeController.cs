@@ -27,6 +27,7 @@ namespace FirstDemo.Web.Controllers
                 Phone = "1234567890"
             };
             var k = user.Sum(71 , 2);
+            _logger.LogInformation("I am in index");
             return View(user);
         }
 
