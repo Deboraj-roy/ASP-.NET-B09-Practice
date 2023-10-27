@@ -31,6 +31,25 @@ namespace FirstDemo.Web.Controllers
             return View(user);
         }
 
+        public IActionResult Test()
+        {
+            TestModel model = new TestModel();
+            model.Email = "jalal@email.com";
+            return View(model);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Test(TestModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // code to write in future
+                int x = 5;
+            }
+            return View(model);
+        }
+
+
         public IActionResult Privacy()
         {
             return View();
