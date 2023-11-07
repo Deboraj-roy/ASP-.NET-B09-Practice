@@ -1,0 +1,2 @@
+2023-11-01 15:24:29.587 +06:00 [ERR] This is an error message.
+2023-11-01 15:24:29.604 +06:00 [FTL] This is a fatal message.
