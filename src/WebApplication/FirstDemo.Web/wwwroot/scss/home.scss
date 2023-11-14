@@ -1,0 +1,32 @@
+﻿ @import "./variables.scss";
+ 
+/* variable
+*/
+.myBtn1 {
+    background-color: $btnColor;
+    text-decoration-color: revert-layer;
+}
+.myBtn2 {
+    background-color: $btnColor;
+    text-decoration-color: revert-layer;
+}
+
+.myDiv {
+    background-color:mediumaquamarine;
+    button{
+        background-color:burlywood;
+        &:hover{
+            background-color :coral;
+        }
+    }
+}
+@mixin applyColor($color: red, $fontColor: white){
+    background-color:$color;
+    color:$fontColor;
+
+}
+
+.myPara{
+    @include applyColor($paraColor);
+}
+

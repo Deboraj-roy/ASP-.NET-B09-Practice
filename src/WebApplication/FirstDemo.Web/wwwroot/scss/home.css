@@ -1,0 +1,26 @@
+﻿/* variable
+*/
+.myBtn1 {
+  background-color: dimgray;
+  text-decoration-color: revert-layer;
+}
+
+.myBtn2 {
+  background-color: dimgray;
+  text-decoration-color: revert-layer;
+}
+
+.myDiv {
+  background-color: mediumaquamarine;
+}
+.myDiv button {
+  background-color: burlywood;
+}
+.myDiv button:hover {
+  background-color: coral;
+}
+
+.myPara {
+  background-color: green;
+  color: white;
+}
