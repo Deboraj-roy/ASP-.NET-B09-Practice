@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singleton", "Singleton\Sing
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaticClass", "StaticClass\StaticClass.csproj", "{D75CF8DA-E289-45C6-80D0-8E922EEAC498}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOLID", "SOLID\SOLID.csproj", "{70230FC2-F646-4526-B3A1-D04393D6B82F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{D75CF8DA-E289-45C6-80D0-8E922EEAC498}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D75CF8DA-E289-45C6-80D0-8E922EEAC498}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D75CF8DA-E289-45C6-80D0-8E922EEAC498}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70230FC2-F646-4526-B3A1-D04393D6B82F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70230FC2-F646-4526-B3A1-D04393D6B82F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70230FC2-F646-4526-B3A1-D04393D6B82F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70230FC2-F646-4526-B3A1-D04393D6B82F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
