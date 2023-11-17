@@ -20,4 +20,44 @@ namespace Singleton
 
         }
     }
+
+
+    public class SingletonLogger
+    {
+        // Private static instance
+        private static SingletonLogger _instance;
+
+        // Private constructor to prevent external instantiation
+        private SingletonLogger()
+        {
+            // Initialize static properties or perform any other setup here
+            LogFilePath = "default_log.txt";
+        }
+
+        // Public static property to access the single instance
+        public static SingletonLogger Instance
+        {
+            get
+            {
+                // If the instance hasn't been created yet, create it
+                if (_instance == null)
+                {
+                    _instance = new SingletonLogger();
+                }
+
+                return _instance;
+            }
+        }
+
+        // Example static property that can be initialized in the private constructor
+        public static string LogFilePath { get; private set; }
+
+        // Example method to log messages
+        public void LogMessage(string message)
+        {
+            // Implementation of log message goes here
+            Console.WriteLine($"Logging to {LogFilePath}: {message}");
+        }
+    }
+
 }
