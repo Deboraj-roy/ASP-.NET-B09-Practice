@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SOLID", "SOLID\SOLID.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype", "Prototype\Prototype.csproj", "{9A3DED74-908B-4749-96AA-B3886B0A830E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events", "Events\Events.csproj", "{0B0DCE29-41A8-4BAB-BE7E-B18DCB4597DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{9A3DED74-908B-4749-96AA-B3886B0A830E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A3DED74-908B-4749-96AA-B3886B0A830E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A3DED74-908B-4749-96AA-B3886B0A830E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B0DCE29-41A8-4BAB-BE7E-B18DCB4597DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B0DCE29-41A8-4BAB-BE7E-B18DCB4597DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B0DCE29-41A8-4BAB-BE7E-B18DCB4597DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B0DCE29-41A8-4BAB-BE7E-B18DCB4597DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
