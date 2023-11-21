@@ -19,11 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaticClass", "StaticClass\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SOLID", "SOLID\SOLID.csproj", "{70230FC2-F646-4526-B3A1-D04393D6B82F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prototype", "Prototype\Prototype.csproj", "{9A3DED74-908B-4749-96AA-B3886B0A830E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prototype", "Prototype\Prototype.csproj", "{9A3DED74-908B-4749-96AA-B3886B0A830E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events", "Events\Events.csproj", "{0B0DCE29-41A8-4BAB-BE7E-B18DCB4597DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events", "Events\Events.csproj", "{0B0DCE29-41A8-4BAB-BE7E-B18DCB4597DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Delegates", "Delegates\Delegates.csproj", "{40009CF8-21E0-4C3F-B8EE-CB3358CBF351}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Delegates", "Delegates\Delegates.csproj", "{40009CF8-21E0-4C3F-B8EE-CB3358CBF351}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryPattern", "FactoryPattern\FactoryPattern.csproj", "{318A79EE-970F-435E-920E-F8DC117512A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{40009CF8-21E0-4C3F-B8EE-CB3358CBF351}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40009CF8-21E0-4C3F-B8EE-CB3358CBF351}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40009CF8-21E0-4C3F-B8EE-CB3358CBF351}.Release|Any CPU.Build.0 = Release|Any CPU
+		{318A79EE-970F-435E-920E-F8DC117512A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{318A79EE-970F-435E-920E-F8DC117512A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{318A79EE-970F-435E-920E-F8DC117512A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{318A79EE-970F-435E-920E-F8DC117512A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
