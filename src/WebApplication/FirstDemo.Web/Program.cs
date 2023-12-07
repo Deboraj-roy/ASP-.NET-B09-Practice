@@ -1,12 +1,12 @@
 using Autofac.Extensions.DependencyInjection;
-using Autofac;
-using FirstDemo.Web.Data;
+using Autofac; 
 using FirstDemo.Web.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using FirstDemo.Web;
 using Serilog;
 using Serilog.Events;
+using FirstDemo.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((ctx, lc) => lc
