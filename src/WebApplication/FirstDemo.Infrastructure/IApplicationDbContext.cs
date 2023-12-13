@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace FirstDemo.Application
+namespace FirstDemo.Infrastructure
 {
     public interface IApplicationDbContext
     {

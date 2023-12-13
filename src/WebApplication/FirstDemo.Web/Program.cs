@@ -7,6 +7,7 @@ using FirstDemo.Web;
 using Serilog;
 using Serilog.Events;
 using FirstDemo.Application;
+using FirstDemo.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((ctx, lc) => lc
