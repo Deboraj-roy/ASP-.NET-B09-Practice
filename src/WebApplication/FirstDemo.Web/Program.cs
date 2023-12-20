@@ -8,6 +8,7 @@ using Serilog;
 using Serilog.Events;
 using FirstDemo.Application;
 using FirstDemo.Infrastructure;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((ctx, lc) => lc
@@ -18,16 +19,24 @@ builder.Host.UseSerilog((ctx, lc) => lc
 
 try
 {
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+    var migrationAssembly = Assembly.GetExecutingAssembly().FullName;
+
     builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
     builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     {
+        containerBuilder.RegisterModule(new ApplicationModule());
+        containerBuilder.RegisterModule(new InfrastructureModule(connectionString,
+            migrationAssembly));
         containerBuilder.RegisterModule(new WebModule());
     });
 
+
     // Add services to the container.
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlServer(connectionString));
+        options.UseSqlServer(connectionString,
+        (m) => m.MigrationsAssembly(migrationAssembly)));
+
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
     builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)

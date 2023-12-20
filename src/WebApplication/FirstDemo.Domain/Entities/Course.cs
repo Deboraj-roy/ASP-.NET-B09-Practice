@@ -12,6 +12,6 @@ namespace FirstDemo.Domain.Entities
         public string Title { get; set; }
         public string Description { get; set; }
         public uint Fees { get; set; }
-        public IList<Topic> Topics { get; set; }
     }
+
 }
