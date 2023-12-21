@@ -27,6 +27,6 @@ namespace FirstDemo.Infrastructure
 		}
 
 		public DbSet<Course> Courses { get; set; }
-        DbSet<Course> IApplicationDbContext.Courses { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        //DbSet<Course> IApplicationDbContext.Courses { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }
