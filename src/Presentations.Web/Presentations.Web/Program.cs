@@ -35,7 +35,9 @@ try
     });
 
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlServer(connectionString));
+        options.UseSqlServer(connectionString,
+        (m) => m.MigrationsAssembly(migrationsAssembly)));
+
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
     builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -69,6 +71,8 @@ try
     app.MapRazorPages();
 
     app.Run();
+
+    Log.Information("Application Starting...");
 }
 catch (Exception ex)
 {
