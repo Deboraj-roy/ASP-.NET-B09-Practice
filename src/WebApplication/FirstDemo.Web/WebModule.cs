@@ -12,6 +12,7 @@ namespace FirstDemo.Web
         {
             builder.RegisterType<UnicodeSmsSender>().As<ISmsSender>(); 
             builder.RegisterType<CourseCreateModel>().AsSelf();
+            builder.RegisterType<CourseListModel>().AsSelf();
         }
     }
 }
