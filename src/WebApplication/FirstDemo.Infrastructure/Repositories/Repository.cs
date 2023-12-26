@@ -79,14 +79,27 @@ namespace FirstDemo.Infrastructure.Repositories
         public virtual async Task<int> GetCountAsync(Expression<Func<TEntity, bool>> filter = null)
         {
             IQueryable<TEntity> query = _dbSet;
-            var count = 0;
+            int count;
 
             if (filter != null)
             {
-                query = query.Where(filter);
+                count = await query.CountAsync(filter);
             }
+            else
+                count = await query.CountAsync();
 
-            count = await query.CountAsync();
+            return count;
+        }
+
+        public virtual int GetCount(Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = _dbSet;
+            int count;
+
+            if (filter != null)
+                count = query.Count(filter);
+            else
+                count = query.Count();
             return count;
         }
 
@@ -299,22 +312,6 @@ namespace FirstDemo.Infrastructure.Repositories
         {
             _dbSet.Attach(entityToUpdate);
             _dbContext.Entry(entityToUpdate).State = EntityState.Modified;
-        }
-
-        public virtual int GetCount(Expression<Func<TEntity, bool>> filter = null)
-        {
-            IQueryable<TEntity> query = _dbSet;
-            var count = 0;
-
-            if (filter != null)
-            {
-                query = query.Where(filter);
-                count = query.Count();
-            }
-            else
-                count = query.Count();
-
-            return count;
         }
 
         public virtual IList<TEntity> Get(Expression<Func<TEntity, bool>> filter,

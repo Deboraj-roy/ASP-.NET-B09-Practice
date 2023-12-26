@@ -9,7 +9,7 @@ namespace FirstDemo.Domain.Repositories
 {
     public interface ICourseRepository : IRepositoryBase<Course, Guid>
     {
-        Task<bool> IsTitleDuplicate(string title, Guid? id = null);
+        Task<bool> IsTitleDuplicateAsync(string title, Guid? id = null);
 
         Task<(IList<Course> records, int total, int totalDisplay)>
             GetTableDataAsync(string searchText, string orderBy,

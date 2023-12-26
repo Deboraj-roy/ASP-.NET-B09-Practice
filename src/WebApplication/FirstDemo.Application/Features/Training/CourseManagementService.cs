@@ -16,9 +16,9 @@ namespace FirstDemo.Application.Features.Training
             _unitOfWork = unitOfWork;
         }
 
-        public async Task CreateCourse(string title, uint fees, string description)
+        public async Task CreateCourseAsync(string title, uint fees, string description)
         {
-            bool isDuplicateTitle = await _unitOfWork.CourseRepository.IsTitleDuplicate(title);
+            bool isDuplicateTitle = await _unitOfWork.CourseRepository.IsTitleDuplicateAsync(title);
 
             if (!isDuplicateTitle)
                 throw new InvalidOperationException();
@@ -31,7 +31,7 @@ namespace FirstDemo.Application.Features.Training
             };
 
             _unitOfWork.CourseRepository.Add(course);
-            _unitOfWork.Save();
+            await _unitOfWork.SaveAsync();
         }
 
         public async Task<(IList<Course> records, int total, int totalDisplay)> GetPagedCoursesAsync(int pageIndex, int pageSize, string searchText, string sortBy)

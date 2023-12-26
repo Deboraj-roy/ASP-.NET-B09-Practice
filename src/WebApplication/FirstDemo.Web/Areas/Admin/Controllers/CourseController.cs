@@ -30,14 +30,22 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult Create(CourseCreateModel model)
+        public async Task<IActionResult> Create(CourseCreateModel model)
         {
             if (ModelState.IsValid)
             {
-                model.Resolve(_scope);
-                model.CreateCourse();
-                return RedirectToAction("Index");
+                try
+                {
+                    model.Resolve(_scope);
+                    await model.CreateCourseAsync();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Failed to create Course.");
+                }
             }
+
 
             return View(model);
         }
