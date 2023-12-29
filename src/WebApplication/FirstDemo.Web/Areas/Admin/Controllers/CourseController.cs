@@ -58,5 +58,56 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
             var data = await model.GetPagedCoursesAsync(dataTablesModel);
             return Json(data);
         }
+
+        public async Task<IActionResult> Update(Guid id)
+        {
+            var model = _scope.Resolve<CourseUpdateModel>();
+            await model.LoadAsync(id);
+            return View(model);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(CourseUpdateModel model)
+        {
+            model.Resolve(_scope);
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await model.UpdateCourseAsync();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Server Error");
+                    _logger.LogError($"{e.Message}: Server Error", e);
+                }
+            }
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var model = _scope.Resolve<CourseListModel>();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await model.DeleteCourseAsync(id);
+
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Server Error");
+                    _logger.LogError($"{e.Message}: Server Error", e);
+                }
+
+            }
+
+            return RedirectToAction("Index");
+
+        }
+
     }
 }

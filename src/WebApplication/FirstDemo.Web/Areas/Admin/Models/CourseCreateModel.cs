@@ -27,7 +27,7 @@ namespace FirstDemo.Web.Areas.Admin.Models
 
         internal async Task CreateCourseAsync()
         {
-            await _courseManagementService.CreateCourseAsync(Title, Fees, Description);
+            await _courseManagementService.CreateCourseAsync(Title, Description, Fees);
         }
     }
 }

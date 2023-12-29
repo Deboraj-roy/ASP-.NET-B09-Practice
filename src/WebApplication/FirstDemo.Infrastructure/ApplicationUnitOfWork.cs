@@ -1,6 +1,7 @@
 ﻿using FirstDemo.Application;
 using FirstDemo.Domain.Repositories;
 using FirstDemo.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace FirstDemo.Infrastructure
     {
         public ICourseRepository CourseRepository { get; private set; }
 
-        public ApplicationUnitOfWork(ICourseRepository courseRepository, ApplicationDbContext dbContext) : base(dbContext)
+        public ApplicationUnitOfWork(ICourseRepository courseRepository, IApplicationDbContext dbContext) : base((DbContext)dbContext)
         {
             CourseRepository = courseRepository;
         }

@@ -1,10 +1,9 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Courses";
 }
 
-@section Styles{
-    <!-- DataTables -->            
+@section Styles {
+    <!-- DataTables -->
     <link rel="stylesheet" href="~/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="~/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="~/admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
@@ -28,7 +27,7 @@
                                     <th>Fees</th>
                                     <th>Actions</th>
                                 </tr>
-                            </thead> 
+                            </thead>
                             <tfoot>
                                 <tr>
                                     <th>Title</th>
@@ -38,11 +37,11 @@
                                 </tr>
                             </tfoot>
                         </table>
+                        <partial name="_ModalPartial" />
                     </div>
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
-                 
                 <!-- /.card -->
             </div>
             <!-- /.col -->
@@ -52,8 +51,7 @@
     <!-- /.container-fluid -->
 </section>
 <!-- /.content -->
-
-@section Scripts{
+@section Scripts {
     <!-- DataTables  & Plugins -->
     <script src="~/admin/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="~/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -77,9 +75,40 @@
                 "ajax": {
                     "url": "/Admin/Course/GetCourses",
                 },
+                "columnDefs": [
+                    {
+                        "orderable": false,
+                        "targets": 3,
+                        "render": function (data, type, row) {
+                            return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/admin/course/update/${data}'" value='${data}'>
+                                                        <i class="fas fa-pencil-alt">
+                                                        </i>
+                                                        Edit
+                                                    </button>
+                                                    <button type="submit" class="btn btn-danger btn-sm show-bs-modal" data-id='${data}' value='${data}'>
+                                                        <i class="fas fa-trash">
+                                                        </i>
+                                                        Delete
+                                                    </button>`;
+                        }
+                    }
+                ],
                 "responsive": true, "lengthChange": false, "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#courses_wrapper .col-md-6:eq(0)');
+
+            $('#courses').on('click', '.show-bs-modal', function (event) {
+                var id = $(this).data("id");
+                var modal = $("#modal-default");
+                modal.find('.modal-body p').text('Are you sure you want to delete this record?');
+                $("#deleteId").val(id);
+                $("#deleteForm").attr("action", "/admin/course/delete");
+                modal.modal('show');
+            });
+            $("#deleteButton").click(function () {
+                $("#deleteForm").submit();
+            });
+
         });
     </script>
 

@@ -16,7 +16,7 @@ namespace FirstDemo.Application.Features.Training
             _unitOfWork = unitOfWork;
         }
 
-        public async Task CreateCourseAsync(string title, uint fees, string description)
+        public async Task CreateCourseAsync(string title, string description, uint fees)
         {
             bool isDuplicateTitle = await _unitOfWork.CourseRepository.IsTitleDuplicateAsync(title);
 
@@ -34,13 +34,26 @@ namespace FirstDemo.Application.Features.Training
             await _unitOfWork.SaveAsync();
         }
 
+        public async Task DeleteCourseAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Course> GetCourseAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<(IList<Course> records, int total, int totalDisplay)> GetPagedCoursesAsync(int pageIndex, int pageSize, string searchText, string sortBy)
         {
             return await _unitOfWork.CourseRepository.GetTableDataAsync(searchText, sortBy, pageIndex, pageSize);
 
         }
- 
 
+        public async Task UpdateCourseAsync(Guid id, string title, string description, uint fees)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }
