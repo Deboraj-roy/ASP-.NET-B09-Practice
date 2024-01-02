@@ -1,4 +1,5 @@
-﻿using FirstDemo.Domain.Features.Training;
+﻿using Autofac;
+using FirstDemo.Domain.Features.Training;
 using FirstDemo.Infrastructure;
 using System.Web;
 
@@ -6,7 +7,11 @@ namespace FirstDemo.Web.Areas.Admin.Models
 {
     public class CourseListModel
     {
+        private ILifetimeScope _scope;
+        private ICourseManagementService _courseManagementService;
+
         private readonly ICourseManagementService _courseService;
+        public CourseSearch SearchItem { get; set; }
 
         public CourseListModel()
         {
@@ -17,7 +22,13 @@ namespace FirstDemo.Web.Areas.Admin.Models
             _courseService = courseService;
         }
 
-        public async Task<object> GetPagedCoursesAsync(DataTablesAjaxRequestUtility dataTablesUtility)
+		public void Resolve(ILifetimeScope scope)
+		{
+			_scope = scope;
+			_courseManagementService = _scope.Resolve<ICourseManagementService>();
+		}
+
+		public async Task<object> GetPagedCoursesAsync(DataTablesAjaxRequestUtility dataTablesUtility)
         {
             var data = await _courseService.GetPagedCoursesAsync(
                 dataTablesUtility.PageIndex,
