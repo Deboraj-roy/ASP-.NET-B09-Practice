@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using FirstDemo.Domain.Exceptions;
 using FirstDemo.Infrastructure;
 using FirstDemo.Web.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -38,17 +39,37 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
                 {
                     model.Resolve(_scope);
                     await model.CreateCourseAsync();
+                    TempData.Put("ResponseMessage", new ResponseModel
+                    {
+                        Message = "Course Created successfully",
+                        Type = ResponseTypes.Success
+                    });
+
                     return RedirectToAction("Index");
+                }
+                catch(DuplicateTitleException de)
+                {
+                    TempData.Put("ResponseMessage", new ResponseModel
+                    {
+                        Message = de.Message,
+                        Type = ResponseTypes.Danger
+                    });
                 }
                 catch (Exception ex)
                 {
                     _logger.LogError(ex, "Failed to create Course.");
+                    _logger.LogError(ex, "Server Error.");
+                    TempData.Put("ResponseMessage", new ResponseModel
+                    {
+                        Message = "There was a problem in creating course",
+                        Type = ResponseTypes.Danger
+                    });
                 }
             }
 
 
             return View(model);
-        }
+        } 
 
         public async Task<JsonResult> GetCourses()
         {
@@ -75,18 +96,37 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
                 try
                 {
                     await model.UpdateCourseAsync();
-                    return RedirectToAction("Index");
+					TempData.Put("ResponseMessage", new ResponseModel
+					{
+						Message = "Updating Course Succesfully",
+						Type = ResponseTypes.Success
+					});
+					return RedirectToAction("Index");
+                }
+                catch (DuplicateTitleException de)
+                {
+                    TempData.Put("ResponseMessage", new ResponseModel
+                    {
+                        Message = de.Message,
+                        Type = ResponseTypes.Danger
+                    });
                 }
                 catch (Exception e)
                 {
                     _logger.LogError(e, "Server Error");
                     _logger.LogError($"{e.Message}: Server Error", e);
+                    TempData.Put("ResponseMessage", new ResponseModel
+                    {
+                        Message = "There is a problem in updating Course",
+                        Type = ResponseTypes.Danger
+                    });
                 }
             }
 
             return View(model);
         }
 
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(Guid id)
         {
             var model = _scope.Resolve<CourseListModel>();
@@ -95,12 +135,26 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
                 try
                 {
                     await model.DeleteCourseAsync(id);
+                    TempData.Put("ResponseMessage", new ResponseModel
+                    {
+                        Message = "Course deleted successfully",
+                        Type = ResponseTypes.Success
+                    });
+
+                    return RedirectToAction("Index");
 
                 }
                 catch (Exception e)
                 {
                     _logger.LogError(e, "Server Error");
                     _logger.LogError($"{e.Message}: Server Error", e);
+
+                    TempData.Put("ResponseMessage", new ResponseModel
+                    {
+                        Message = "There is a problem in creating course",
+                        Type = ResponseTypes.Danger
+                    });
+
                 }
 
             }

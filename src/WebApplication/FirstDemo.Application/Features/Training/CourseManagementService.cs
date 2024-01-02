@@ -1,4 +1,5 @@
 ﻿using FirstDemo.Domain.Entities;
+using FirstDemo.Domain.Exceptions;
 using FirstDemo.Domain.Features.Training;
 using System;
 using System.Collections.Generic;
@@ -20,8 +21,8 @@ namespace FirstDemo.Application.Features.Training
         {
             bool isDuplicateTitle = await _unitOfWork.CourseRepository.IsTitleDuplicateAsync(title);
 
-            if (!isDuplicateTitle)
-                throw new InvalidOperationException();
+            if (isDuplicateTitle)
+                throw new DuplicateTitleException();
 
             Course course = new Course
             {
@@ -36,12 +37,13 @@ namespace FirstDemo.Application.Features.Training
 
         public async Task DeleteCourseAsync(Guid id)
         {
-            throw new NotImplementedException();
+            await _unitOfWork.CourseRepository.RemoveAsync(id);
+            await _unitOfWork.SaveAsync();
         }
 
         public async Task<Course> GetCourseAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _unitOfWork.CourseRepository.GetByIdAsync(id);
         }
 
         public async Task<(IList<Course> records, int total, int totalDisplay)> GetPagedCoursesAsync(int pageIndex, int pageSize, string searchText, string sortBy)
@@ -52,7 +54,19 @@ namespace FirstDemo.Application.Features.Training
 
         public async Task UpdateCourseAsync(Guid id, string title, string description, uint fees)
         {
-            throw new NotImplementedException();
+            bool isDuplicateTitle = await _unitOfWork.CourseRepository
+                .IsTitleDuplicateAsync(title,id);
+            if (isDuplicateTitle)
+                throw new DuplicateTitleException();
+            var course = await GetCourseAsync(id);
+            if(course is not null)
+            {
+                course.Title = title;
+                course.Description = description;
+                course.Fees = fees;
+            }
+
+            await _unitOfWork.SaveAsync();
         }
     }
 
