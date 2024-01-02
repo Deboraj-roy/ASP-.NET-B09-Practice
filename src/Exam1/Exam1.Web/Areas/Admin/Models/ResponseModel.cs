@@ -1,4 +1,4 @@
-﻿namespace FirstDemo.Web.Areas.Admin.Models
+﻿namespace Exam1.Web.Areas.Admin.Models
 {
     public enum ResponseTypes
     {
