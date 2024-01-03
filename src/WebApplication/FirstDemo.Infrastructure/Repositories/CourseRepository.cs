@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,9 +16,16 @@ namespace FirstDemo.Infrastructure.Repositories
         {
         }
 
-        public async Task<(IList<Course> records, int total, int totalDisplay)> GetTableDataAsync(string searchText, string orderBy, int pageIndex, int pageSize)
+        public async Task<(IList<Course> records, int total, int totalDisplay)> 
+            GetTableDataAsync(string searchTitle, uint searchFeeFrom, uint searchFeeTo, string orderBy, int pageIndex, int pageSize)
         {
-            return await GetDynamicAsync(x => x.Title.Contains(searchText),
+            Expression<Func<Course, bool>> expression = null;
+            if(!string.IsNullOrWhiteSpace(searchTitle))
+            {
+                expression = x => x.Title.Contains(searchTitle) &&
+                (x.Fees >= searchFeeFrom && x.Fees <= searchFeeTo);
+            }
+            return await GetDynamicAsync(expression,
                 orderBy, null, pageIndex, pageSize, true);
         }
 

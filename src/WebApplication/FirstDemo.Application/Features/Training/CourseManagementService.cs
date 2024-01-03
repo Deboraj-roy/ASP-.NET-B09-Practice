@@ -46,9 +46,10 @@ namespace FirstDemo.Application.Features.Training
             return await _unitOfWork.CourseRepository.GetByIdAsync(id);
         }
 
-        public async Task<(IList<Course> records, int total, int totalDisplay)> GetPagedCoursesAsync(int pageIndex, int pageSize, string searchText, string sortBy)
+        public async Task<(IList<Course> records, int total, int totalDisplay)> 
+            GetPagedCoursesAsync(int pageIndex, int pageSize, string searchTitle, uint searchFeeFrom, uint searchFeeTo, string sortBy)
         {
-            return await _unitOfWork.CourseRepository.GetTableDataAsync(searchText, sortBy, pageIndex, pageSize);
+            return await _unitOfWork.CourseRepository.GetTableDataAsync(searchTitle, searchFeeFrom, searchFeeTo, sortBy, pageIndex, pageSize);
 
         }
 

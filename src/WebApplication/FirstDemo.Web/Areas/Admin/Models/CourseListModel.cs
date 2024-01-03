@@ -34,7 +34,9 @@ namespace FirstDemo.Web.Areas.Admin.Models
             var data = await _courseManagementService.GetPagedCoursesAsync(
                 dataTablesUtility.PageIndex,
                 dataTablesUtility.PageSize,
-                dataTablesUtility.SearchText,
+                SearchItem.Title,
+                SearchItem.CourseFeeFrom, 
+                SearchItem.CourseFeeTo,
                 dataTablesUtility.GetSortText(new string[] { "Title", "Description", "Fees" }));
 
             return new

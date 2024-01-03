@@ -12,7 +12,7 @@ namespace FirstDemo.Domain.Repositories
         Task<bool> IsTitleDuplicateAsync(string title, Guid? id = null);
 
         Task<(IList<Course> records, int total, int totalDisplay)>
-            GetTableDataAsync(string searchText, string orderBy,
-                int pageIndex, int pageSize);
+            GetTableDataAsync(string searchTitle, uint searchFeeFrom,
+            uint searchFeeTo, string orderBy, int pageIndex, int pageSize);
     }
 }
