@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="~/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="~/admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 }
-
 <div class="content-header">
     <div class="col-12">
         <div class="card card-outline card-primary collapsed-card">
@@ -105,20 +104,25 @@
     <script src="~/admin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="~/admin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="~/admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-
+  
     <script>
         $(function () {
             $("#courses").DataTable({
                 processing: true,
                 serverSide: true,
+                responsive: true,
+                lengthChange: false,
+                autoWidth: false,
                 ajax: {
                     url: "/Admin/Course/GetCourses",
+                    type: "POST",
                     data: function (d) {
                         d.SearchItem = {
                             Title: $("#SearchItem_Title").val(),
-                            CourseFeesFrom: $("#SearchItem_CourseFeesFrom").val(),
-                            CourseFeesTo: $("#SearchItem_CourseFeesTo").val(),
-                        }
+                            CourseFeesFrom: $("#SearchItem_CourseFeesFrom").val() === "" ? null : $("#SearchItem_CourseFeesFrom").val(),
+                            CourseFeesTo: $("#SearchItem_CourseFeesTo").val() === "" ? null : $("#SearchItem_CourseFeesTo").val()
+                        };
+                        //console.log(d.SearchItem);
                     },
                 },
                 columnDefs: [
@@ -127,21 +131,20 @@
                         targets: 3,
                         render: function (data, type, row) {
                             return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/admin/course/update/${data}'" value='${data}'>
-                                    <i class="fas fa-pencil-alt">
-                                    </i>
-                                    Edit
-                                </button>
-                                <button type="submit" class="btn btn-danger btn-sm show-bs-modal" data-id='${data}' value='${data}'>
-                                    <i class="fas fa-trash">
-                                    </i>
-                                    Delete
-                                </button>`;
+                                                <i class="fas fa-pencil-alt">
+                                                </i>
+                                                Edit
+                                            </button>
+                                            <button type="submit" class="btn btn-danger btn-sm show-bs-modal" data-id='${data}' value='${data}'>
+                                                <i class="fas fa-trash">
+                                                </i>
+                                                Delete
+                                            </button>`;
                         }
                     }
                 ],
-                responsive: true, "lengthChange": false, "autoWidth": false,
                 buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#courses_wrapper .col-md-6:eq(0)');
+            }).buttons().container().appendTo('#courses_wrapper'); 
 
             $('#courses').on('click', '.show-bs-modal', function (event) {
                 let id = $(this).data("id");
@@ -155,11 +158,10 @@
             $("#deleteButton").click(function () {
                 $("#deleteForm").submit();
             });
-            
+
             $("#searchButton").click(function () {
                 $('#courses').DataTable().ajax.reload(null, false);
             });
-
         });
     </script>
 }

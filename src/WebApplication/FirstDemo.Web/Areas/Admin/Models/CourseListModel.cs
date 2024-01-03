@@ -35,7 +35,7 @@ namespace FirstDemo.Web.Areas.Admin.Models
                 dataTablesUtility.PageIndex,
                 dataTablesUtility.PageSize,
                 dataTablesUtility.SearchText,
-                dataTablesUtility.GetSortText(new string[] { "Title", "Fees" }));
+                dataTablesUtility.GetSortText(new string[] { "Title", "Description", "Fees" }));
 
             return new
             {

@@ -69,9 +69,10 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
 
 
             return View(model);
-        } 
+        }
 
-        public async Task<JsonResult> GetCourses([FromBody] CourseListModel model)
+        [HttpPost]
+        public async Task<JsonResult> GetCourses(CourseListModel model)
         {
             var dataTablesModel = new DataTablesAjaxRequestUtility(Request);
             model.Resolve(_scope);
