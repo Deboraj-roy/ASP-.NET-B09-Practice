@@ -8,10 +8,10 @@ namespace Exam1.Web.Areas.Admin.Models
     {
         private ILifetimeScope _scope;
         private IProductManagementServices _productManagementServices;
-        /*public string Name { get; set; }
+        public string Name { get; set; }
         public uint Price { get; set; }
-        public double Weight { get; set; }*/
-        public Product product {  get; set; } 
+        public double Weight { get; set; }
+        // public Product product {  get; set; } 
         public ProductCreateModel()
         {
 
@@ -29,7 +29,7 @@ namespace Exam1.Web.Areas.Admin.Models
 
         internal async Task CreateCourseAsync()
         {
-            await _productManagementServices.CreateProductAsync(product);
+            await _productManagementServices.CreateProductAsync( Name, Price, Weight);
         }
 
     }

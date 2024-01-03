@@ -16,7 +16,7 @@ namespace Exam1.Application.Features
             _unitofWork = unitofWork;
         }
 
-        public Task CreateProductAsync(Product product)
+        public Task CreateProductAsync(string Name, uint Price, double Weight)
         {
             throw new NotImplementedException();
         }
@@ -36,7 +36,7 @@ namespace Exam1.Application.Features
             throw new NotImplementedException();
         }
 
-        public Task UpdateProductAsync(Product product)
+        public Task UpdateProductAsync(Guid Id, string Name, uint Price, double Weight)
         {
             throw new NotImplementedException();
         }
