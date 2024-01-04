@@ -15,21 +15,21 @@ namespace Exam1.Infrastructure
         private readonly string _conncetionString;
         private readonly string _migrationAssembly;
 
-        public InfrastructureModule(string conncetionString, string migrationAssembly)
+        public InfrastructureModule(string connectionString, string migrationAssembly)
         {
-            _conncetionString = conncetionString;
+            _conncetionString = connectionString;
             _migrationAssembly = migrationAssembly;
         }
 
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<ApplicationDbContext>().AsSelf()
-                .WithParameter("conncetionString", _conncetionString)
+                .WithParameter("connectionString", _conncetionString)
                 .WithParameter("migrationAssembly", _migrationAssembly)
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<ApplicationDbContext>().As<IApplicationDbContext>()
-                .WithParameter("conncetionString", _conncetionString)
+                .WithParameter("connectionString", _conncetionString)
                 .WithParameter("migrationAssembly", _migrationAssembly)
                 .InstancePerLifetimeScope();
 

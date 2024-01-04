@@ -15,6 +15,7 @@ namespace Exam1.Web.Controllers
 
         public IActionResult Index()
         {
+            _logger.LogInformation("I am in index");
             return View();
         }
 
