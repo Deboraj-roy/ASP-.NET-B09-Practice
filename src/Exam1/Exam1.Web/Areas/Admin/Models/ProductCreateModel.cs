@@ -29,7 +29,7 @@ namespace Exam1.Web.Areas.Admin.Models
 
         internal async Task CreateCourseAsync()
         {
-            await _productManagementServices.CreateProductAsync( Name, Price, Weight);
+            await _productManagementServices.CreateProductAsync(Name, Price, Weight);
         }
 
     }

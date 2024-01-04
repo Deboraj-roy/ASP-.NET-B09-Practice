@@ -9,10 +9,10 @@ namespace Exam1.Domain.Repositories
 {
     public interface IProductRepository : IRepositoryBase<Product, Guid>
     {
-        Task<bool> IsTitleDulicateAsync(string title, Guid? id = null);
+        Task<bool> IsTitleDulicateAsync(string name, Guid? id = null);
 
         Task<(List<Product> records, int total, int totalDisplay)>
-            GetTableDataAsync(string searchTitle, uint searchFeesFrom,
-            uint searchFeesTo, string orderBy, int pageIndex, int pageSize);
+            GetTableDataAsync(string name, uint price,
+            double weight, string orderBy, int pageIndex, int pageSize);
     }
 }

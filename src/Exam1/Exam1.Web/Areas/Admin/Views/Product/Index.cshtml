@@ -1,32 +1,102 @@
 ﻿@model ProductListModel
 @{
-    ViewData["Title"] = "Product";
+    ViewData["Title"] = "Products";
 }
-<h1 class="align-middle">Product Index</h1>
-<!-- /.card-header -->
-<div class="card-body">
-    <partial name="_ResponsePartial" />
-    <table id="product" class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Weight</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Weight</th>
-                <th>Action</th>
-            </tr>
-        </tfoot>
-    </table>
-    @* <partial name="_ModalPartial" /> *@
+@section Styles
+{
+    <link rel="stylesheet" href="~/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+}
+<div class="content-header">
+    <div class="col-12">
+        @*
+        <div class="card card-outline card-primary collapsed-card">
+            <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-search mr-1"></i>Search Product</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" asp-for="SearchItem.Title" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Course Fees From</label>
+                            <input type="text" asp-for="SearchItem.CourseFeesFrom" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Course Fees To</label>
+                            <input type="text" asp-for="SearchItem.CourseFeesTo" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button id="searchButton" type="submit" class="btn btn-primary float-right">Search</button>
+            </div>
+            *@
+        </div>
+    </div>
 </div>
-<!-- /.card-body -->
+<!-- /.content-header -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">DataTable with default features</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                 @*    <partial name="_ResponsePartial" /> *@
+                    <table id="products" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Weight</th>
+                                <th>Price</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Weight</th>
+                                <th>Price</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                   @*  <partial name="_ModalPartial" /> *@
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</div>
 @section Scripts
 {
     <script src="~/admin/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -44,14 +114,14 @@
 
     <script>
         $(function () {
-            $("#product").DataTable({
+            $("#products").DataTable({
                 processing: true,
                 serverSide: true,
                 responsive: true,
                 lengthChange: false,
                 autoWidth: false,
                 ajax: {
-                    url: "/Admin/Product/GetProducts",
+                    url: "/Admin/Course/Getproducts",
                     type: "POST",
                     data: function (d) {
                         d.SearchItem = {
@@ -68,22 +138,22 @@
                         targets: 3,
                         render: function (data, type, row) {
                             return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/admin/course/update/${data}'" value='${data}'>
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Edit
-                                    </button>
-                                    <button type="submit" class="btn btn-danger btn-sm show-bs-modal" data-id='${data}' value='${data}'>
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
-                                    </button>`;
+                                                <i class="fas fa-pencil-alt">
+                                                </i>
+                                                Edit
+                                            </button>
+                                            <button type="submit" class="btn btn-danger btn-sm show-bs-modal" data-id='${data}' value='${data}'>
+                                                <i class="fas fa-trash">
+                                                </i>
+                                                Delete
+                                            </button>`;
                         }
                     }
                 ],
                 buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#courses_wrapper');
+            }).buttons().container().appendTo('#products_wrapper');
 
-            $('#courses').on('click', '.show-bs-modal', function (event) {
+            $('#products').on('click', '.show-bs-modal', function (event) {
                 let id = $(this).data("id");
                 let modal = $("#modal-default");
                 modal.find('.modal-body p').text('Are you sure you want to delete this record?');
@@ -97,7 +167,7 @@
             });
 
             $("#searchButton").click(function () {
-                $('#courses').DataTable().ajax.reload(null, false);
+                $('#products').DataTable().ajax.reload(null, false);
             });
         });
     </script>

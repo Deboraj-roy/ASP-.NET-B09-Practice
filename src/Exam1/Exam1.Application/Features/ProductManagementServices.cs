@@ -16,24 +16,33 @@ namespace Exam1.Application.Features
             _unitofWork = unitofWork;
         }
 
-        public Task CreateProductAsync(string Name, uint Price, double Weight)
+        public async Task CreateProductAsync(string name, uint price, double weight)
         {
-            throw new NotImplementedException();
+            Product product = new Product
+            {
+                Name = name,
+                Price = price,
+                Weight = weight
+            };
+            _unitofWork.ProductRepository.Add(product);
+            await _unitofWork.SaveAsync();
         }
 
-        public Task DeleteProductAsync(Guid id)
+        public async Task DeleteProductAsync(Guid id)
         {
-            throw new NotImplementedException();
+            await _unitofWork.ProductRepository.RemoveAsync(id);
+            await _unitofWork.SaveAsync();
         }
 
-        public Task<(List<Product> records, int total, int totalDisplay)> GetPagedProductAsync(int pageIndex, int pageSize, string searchTitle, uint serachFeesFrom, uint searchFeesTo, string sortBy)
+        public async Task<(List<Product> records, int total, int totalDisplay)> 
+            GetPagedProductAsync(string name, uint price, double weight, string sortBy, int pageIndex, int pageSize)
         {
-            throw new NotImplementedException();
+            return await _unitofWork.ProductRepository.GetTableDataAsync(name, price, weight, sortBy, pageIndex, pageSize);
         }
 
-        public Task<Product> GetProductAsync(Guid id)
+        public async Task<Product> GetProductAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _unitofWork.ProductRepository.GetByIdAsync(id);
         }
 
         public Task UpdateProductAsync(Guid Id, string Name, uint Price, double Weight)

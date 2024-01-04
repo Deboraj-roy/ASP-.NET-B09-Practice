@@ -17,7 +17,7 @@ namespace Exam1.Infrastructure.Repository
         {
         }
 
-        public Task<(List<Product> records, int total, int totalDisplay)> GetTableDataAsync(string searchTitle, uint searchFeesFrom, uint searchFeesTo, string orderBy, int pageIndex, int pageSize)
+        public Task<(List<Product> records, int total, int totalDisplay)> GetTableDataAsync(string name, uint price, double weight, string orderBy, int pageIndex, int pageSize)
         {
             throw new NotImplementedException();
             /*Expression<Func<Product, bool>> expression = null;
@@ -27,7 +27,7 @@ namespace Exam1.Infrastructure.Repository
             }*/
         }
 
-        public Task<bool> IsTitleDulicateAsync(string title, Guid? id = null)
+        public Task<bool> IsTitleDulicateAsync(string name, Guid? id = null)
         {
             throw new NotImplementedException();
         }
