@@ -30,7 +30,7 @@ namespace Exam1.Web.Areas.Admin.Models
         }
 
 
-        public async Task<object> GetPagedCoursesAsync(DataTablesAjaxRequestUtility dataTablesUtility)
+        public async Task<object> GetPagedProductsAsync(DataTablesAjaxRequestUtility dataTablesUtility)
         {
             var data = await _productManagementServices.GetPagedProductAsync(
                 SearchModel.Name,

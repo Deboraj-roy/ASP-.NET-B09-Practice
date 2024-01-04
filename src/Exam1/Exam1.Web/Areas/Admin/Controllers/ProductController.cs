@@ -37,25 +37,25 @@ namespace Exam1.Web.Areas.Admin.Controllers
                 try
                 {
                     model.Resolve(_scope);
-                    await model.CreateCourseAsync();
+                    await model.CreateProductAsync();
 
                     return RedirectToAction("Index");
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Server Error Create Course");
+                    _logger.LogError(ex, "Server Error Create Product");
                 }
             }
             return View(model);
         }
 
         [HttpPost]
-        public async Task<JsonResult> GetCourses(ProductListModel model)
+        public async Task<JsonResult> GetProducts(ProductListModel model)
         {
             var dataTablesModel = new DataTablesAjaxRequestUtility(Request);
             model.Resolve(_scope);
 
-            var data = await model.GetPagedCoursesAsync(dataTablesModel);
+            var data = await model.GetPagedProductsAsync(dataTablesModel);
             return Json(data);
         }
 

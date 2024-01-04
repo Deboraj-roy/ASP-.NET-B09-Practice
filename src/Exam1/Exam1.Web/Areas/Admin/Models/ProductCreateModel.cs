@@ -27,7 +27,7 @@ namespace Exam1.Web.Areas.Admin.Models
             _productManagementServices = _scope.Resolve<IProductManagementServices>();
         }
 
-        internal async Task CreateCourseAsync()
+        internal async Task CreateProductAsync()
         {
             await _productManagementServices.CreateProductAsync(Name, Price, Weight);
         }
