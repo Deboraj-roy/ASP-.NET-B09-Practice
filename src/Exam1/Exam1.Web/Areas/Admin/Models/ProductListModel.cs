@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Exam1.Domain.Features;
 using Exam1.Infrastructure;
+using System.Drawing.Printing;
+using System.Globalization;
 using System.Web;
 
 namespace Exam1.Web.Areas.Admin.Models
@@ -9,6 +11,8 @@ namespace Exam1.Web.Areas.Admin.Models
     {
         private ILifetimeScope _scope;
         private IProductManagementServices _productManagementServices;
+
+        public ProductSearchModel SearchModel { get; set; }
 
         public ProductListModel()
         {
@@ -25,33 +29,33 @@ namespace Exam1.Web.Areas.Admin.Models
             _productManagementServices = _scope.Resolve<IProductManagementServices>();
         }
 
-        /*
-                public async Task<object> GetPagedCoursesAsync(DataTablesAjaxRequestUtility dataTablesUtility)
-                {
-                    var data = await _courseManagementService.GetPagedCoursesAsync(
-                        dataTablesUtility.PageIndex,
-                        dataTablesUtility.PageSize,
-                        SearchItem.Title,
-                        SearchItem.CourseFeesFrom,
-                        SearchItem.CourseFeesTo,
-                        dataTablesUtility.GetSortText(new string[] { "Title", "Description", "Fees" }));
 
-                    return new
-                    {
-                        recordsTotal = data.total,
-                        recordsFiltered = data.totalDisplay,
-                        data = (from record in data.records
-                                select new string[]
-                                {
-                                        HttpUtility.HtmlEncode(record.Title),
-                                        HttpUtility.HtmlEncode(record.Description),
-                                        record.Fees.ToString(),
-                                        record.Id.ToString()
-                                }
-                            ).ToArray()
-                    };
-                }
-        */
+        public async Task<object> GetPagedCoursesAsync(DataTablesAjaxRequestUtility dataTablesUtility)
+        {
+            var data = await _productManagementServices.GetPagedProductAsync(
+                SearchModel.Name,
+                SearchModel.Price,
+                SearchModel.Weight,
+                dataTablesUtility.GetSortText(new string[] { "Name", "Price", "Wight" }),
+                dataTablesUtility.PageIndex,
+                dataTablesUtility.PageSize);
+
+            return new
+            {
+                recordsTotal = data.total,
+                recordsFiltered = data.totalDisplay,
+                data = (from record in data.records
+                        select new string[]
+                        {
+                            HttpUtility.HtmlEncode(record.Name),
+                            HttpUtility.HtmlEncode(record.Price.ToString()),
+                            record.Weight.ToString(),
+                            record.Id.ToString()
+                        }
+                    ).ToArray()
+            };
+        }
+
 
         internal async Task DeleteProductAsync(Guid id)
         {
