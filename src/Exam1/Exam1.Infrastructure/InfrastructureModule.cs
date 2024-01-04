@@ -33,7 +33,7 @@ namespace Exam1.Infrastructure
                 .WithParameter("migrationAssembly", _migrationAssembly)
                 .InstancePerLifetimeScope();
 
-            builder.RegisterType<IApplicationUnitofWork>().As<IApplicationUnitofWork>()
+            builder.RegisterType<ApplicationUnitofWork>().As<IApplicationUnitofWork>()
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<ProductRepository>().As<IProductRepository>()
