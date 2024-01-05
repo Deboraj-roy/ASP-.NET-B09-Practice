@@ -122,7 +122,7 @@
                             Price: $("#SearchModel_Price").val() === "" ? null : $("#SearchModel_Price").val(),
                             Weight: $("#SearchModel_Weight").val() === "" ? null : $("#SearchModel_Weight").val()
                         };
-                        console.log(d.SearchModel);
+                        console.log("Data sent to server:", d); // Add this line for debugging
                     },
                 },
                 columnDefs: [

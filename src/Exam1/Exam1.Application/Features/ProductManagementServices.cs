@@ -34,6 +34,11 @@ namespace Exam1.Application.Features
             await _unitofWork.SaveAsync();
         }
 
+        /*public async Task<Product> GetAllProductAsync()
+        {
+             return await _unitofWork.ProductRepository.GetAllProductsAsync();
+        }*/
+
         public async Task<(List<Product> records, int total, int totalDisplay)> 
             GetPagedProductAsync(string name, uint price, double weight, string sortBy, int pageIndex, int pageSize)
         {

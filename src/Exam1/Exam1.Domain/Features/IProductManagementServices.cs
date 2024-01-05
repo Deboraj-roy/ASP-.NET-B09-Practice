@@ -16,6 +16,7 @@ namespace Exam1.Domain.Features
         Task CreateProductAsync(string name, uint price, double weight);
         Task DeleteProductAsync(Guid id);
         Task<Product> GetProductAsync(Guid id);
+        //Task<Product> GetAllProductAsync();
         Task<(List<Product> records, int total, int totalDisplay)>
             GetPagedProductAsync(string searchName,
             uint price, double weigh, string sortBy,int pageIndex, int pageSize);

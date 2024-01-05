@@ -10,7 +10,7 @@ namespace Exam1.Domain.Repositories
     public interface IProductRepository : IRepositoryBase<Product, Guid>
     {
         Task<bool> IsTitleDulicateAsync(string name, Guid? id = null);
-
+        /*Task<IEnumerable<Product>> GetAllProductsAsync();*/
         Task<(List<Product> records, int total, int totalDisplay)>
             GetTableDataAsync(string name, uint price,
             double weight, string orderBy, int pageIndex, int pageSize);
