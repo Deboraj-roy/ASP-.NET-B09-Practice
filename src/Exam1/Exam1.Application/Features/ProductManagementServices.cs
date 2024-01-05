@@ -1,4 +1,5 @@
-﻿using Exam1.Domain.Entities;
+﻿using Exam1.Domain;
+using Exam1.Domain.Entities;
 using Exam1.Domain.Features;
 using System;
 using System.Collections.Generic;
@@ -50,9 +51,16 @@ namespace Exam1.Application.Features
             return await _unitofWork.ProductRepository.GetByIdAsync(id);
         }
 
-        public Task UpdateProductAsync(Guid Id, string Name, uint Price, double Weight)
+        public async Task UpdateProductAsync(Guid Id, string name, uint price, double weight)
         {
-            throw new NotImplementedException();
+            var course = await GetProductAsync(Id);
+            if (course is not null)
+            {
+                course.Name = name;
+                course.Price = price;
+                course.Weight = weight;
+            }
+            await _unitofWork.SaveAsync();
         }
     }
 }
