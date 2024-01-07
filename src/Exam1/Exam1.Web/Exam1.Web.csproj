@@ -24,4 +24,9 @@
     <Folder Include="Areas\Admin\Data\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Exam1.Application\Exam1.Application.csproj" />
+    <ProjectReference Include="..\Exam1.Infrastructure\Exam1.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
