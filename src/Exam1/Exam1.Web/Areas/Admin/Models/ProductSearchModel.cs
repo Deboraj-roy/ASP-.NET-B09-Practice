@@ -3,7 +3,8 @@
     public class ProductSearchModel
     {
         public string Name { get; set; }
-        public uint Price { get; set; }
-        public double Weight { get; set; }
+        public uint PriceFrom { get; set; }
+        public uint PriceTo { get; set; }
+        //public double Weight { get; set; }
     }
 }

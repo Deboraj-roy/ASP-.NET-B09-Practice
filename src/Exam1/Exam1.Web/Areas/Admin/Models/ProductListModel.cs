@@ -34,8 +34,8 @@ namespace Exam1.Web.Areas.Admin.Models
         {
             var data = await _productManagementServices.GetPagedProductAsync(
                 SearchModel.Name,
-                SearchModel.Price,
-                SearchModel.Weight,
+                SearchModel.PriceFrom,
+                SearchModel.PriceTo,
                 dataTablesUtility.GetSortText(new string[] { "Name", "Price", "Wight" }),
                 dataTablesUtility.PageIndex,
                 dataTablesUtility.PageSize);
@@ -48,7 +48,7 @@ namespace Exam1.Web.Areas.Admin.Models
                         select new string[]
                         {
                             HttpUtility.HtmlEncode(record.Name),
-                            HttpUtility.HtmlEncode(record.Price.ToString()),
+                            record.Price.ToString(),
                             record.Weight.ToString(),
                             record.Id.ToString()
                         }
