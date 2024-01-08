@@ -1,5 +1,8 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Exam1.Application;
+using Exam1.Infrastructure;
+using Exam1.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -22,15 +25,20 @@ try
 	builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
     builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     {
+        containerBuilder.RegisterModule(new ApplicationModule());
+        containerBuilder.RegisterModule(new InfrastructureModule(connectionString, migrationAssembly));
+        containerBuilder.RegisterModule(new WebModule());
     });
 
 
-    // Add services to the container.
-    //builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    //    options.UseSqlServer(connectionString, 
-    //    (m) => m.MigrationsAssembly(migrationAssembly)));
+    //Add services to the container.
+    builder.Services.AddDbContext<ApplicationDbContext>(options =>
+       options.UseSqlServer(connectionString,
+       (m) => m.MigrationsAssembly(migrationAssembly)));
 
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+    builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
     builder.Services.AddControllersWithViews();
 
