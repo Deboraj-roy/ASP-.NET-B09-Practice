@@ -33,9 +33,9 @@ namespace Exam1.Application.Feature
             await _unitOfWork.SaveAsync();
         }
 
-        public async Task<(List<Product> records, int total, int totalDisplay)> GetPageProductAsync(string searchName, uint price, double weigh, string sortBy, int pageIndex, int pageSize)
+        public async Task<(List<Product> records, int total, int totalDisplay)> GetPageProductAsync(string searchName, uint searchPriceFrom, uint searchPriceTo, string sortBy, int pageIndex, int pageSize)
         {
-            return await _unitOfWork.ProductRepository.GetTableDataAsync(searchName, price, weigh, sortBy, pageIndex, pageSize);
+            return await _unitOfWork.ProductRepository.GetTableDataAsync(searchName, searchPriceFrom, searchPriceTo, sortBy, pageIndex, pageSize);
         }
 
         public async Task<Product> GetProductAsync(Guid id)

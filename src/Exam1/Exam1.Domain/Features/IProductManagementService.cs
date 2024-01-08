@@ -13,7 +13,7 @@ namespace Exam1.Domain.Features
         Task DeleteProductAsync(Guid id);
         Task<Product> GetProductAsync(Guid id);
         Task UpdateProductAsync(Guid id, string name, uint price, double weight);
-        Task<(List<Product> records, int total, int totalDisplay)> GetPageProductAsync(string searchName, uint price, double weigh, string sortBy, 
+        Task<(List<Product> records, int total, int totalDisplay)> GetPageProductAsync(string searchName, uint searchPriceFrom, uint searchPriceTo, string sortBy, 
             int  pageIndex, int pageSize);
     }
 }

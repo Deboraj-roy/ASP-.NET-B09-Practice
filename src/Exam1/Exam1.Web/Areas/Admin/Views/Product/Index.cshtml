@@ -1,4 +1,8 @@
-﻿@section Styles
+﻿@model ProductListModel
+@{
+    ViewData["Name"] = "Product";
+};
+@section Styles
 {
     <link rel="stylesheet" href="~/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="~/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -24,7 +28,7 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" asp-for="SearchModel.Name" class="form-control" />
+                            <input type="text" asp-for=".Name" class="form-control" />
                         </div>
                     </div>
                     <div class="col-sm-3">

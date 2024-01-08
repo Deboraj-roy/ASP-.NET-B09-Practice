@@ -1,5 +1,6 @@
 ﻿using Exam1.Application;
 using Exam1.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;

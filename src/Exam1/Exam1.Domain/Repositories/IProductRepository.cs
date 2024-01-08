@@ -10,7 +10,8 @@ namespace Exam1.Domain.Repositories
     public interface IProductRepository : IRepositoryBase<Product, Guid>
     {/*
         Task<bool> IsTitleDuplicateAsync(Product product);  */
-        Task<(List<Product> records, int total, int totalDisplay)> GetTableDataAsync(string name, uint price, double weigh, string sortBy,
+        Task<bool> IsNameDuplicateAsync(string name, Guid? id = null);
+        Task<(List<Product> records, int total, int totalDisplay)> GetTableDataAsync(string searchName, uint searchPriceFrom, uint searchPriceTo, string sortBy,
             int pageIndex, int pageSize);
     }
 }
