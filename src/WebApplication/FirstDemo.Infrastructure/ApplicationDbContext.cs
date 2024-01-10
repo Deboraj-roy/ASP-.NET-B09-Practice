@@ -26,6 +26,16 @@ namespace FirstDemo.Infrastructure
             base.OnConfiguring(optionsBuilder);
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Course>().HasData(new Course[]
+            {
+                new Course{ Id=Guid.NewGuid(), Title = "Test Course 1", Description= " Test Description 1", Fees = 2000 },
+                new Course{ Id=Guid.NewGuid(), Title = "Test Course 2", Description= " Test Description 2", Fees = 3000 }
+            });
+            base.OnModelCreating(builder);
+        }
+
         public DbSet<Course> Courses { get; set; }
     }
 }
