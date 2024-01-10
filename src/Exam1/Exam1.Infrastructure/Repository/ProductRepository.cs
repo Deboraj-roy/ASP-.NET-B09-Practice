@@ -40,13 +40,14 @@ namespace Exam1.Infrastructure.Repository
                 (x.Price >= searchPriceFrom && x.Price <= searchPriceTo));
             }
 
-            var result = await GetDynamicAsync(expression, sortBy, null, pageIndex, pageSize, true); 
+            var result = await GetDynamicAsync(expression, sortBy, null, pageIndex, pageSize, true);
 
             List<Product> records = result.data.ToList();
             int total = result.total;
             int totalDisplay = result.totalDisplay;
 
-            return(records, total, totalDisplay);
+            return (records, total, totalDisplay);
+            //return  await GetDynamicAsync(expression, sortBy, null, pageIndex, pageSize, true);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Exam1.Application.Feature
                 Price = price,
                 Weight = weight
             };
-            _unitOfWork.ProductRepository.Add(product);
+            await _unitOfWork.ProductRepository.AddAsync(product);
             await _unitOfWork.SaveAsync();
         }
 
