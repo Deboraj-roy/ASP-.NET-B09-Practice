@@ -28,11 +28,7 @@ namespace Exam1.Infrastructure
             }
             base.OnConfiguring(optionsBuilder);
         }
-
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
-        }
+         
         public DbSet<Product> Products { get; set; }
     }
 }
