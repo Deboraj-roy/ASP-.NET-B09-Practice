@@ -1,2 +1,6 @@
-# ASP-.NET-b09-Practice
-Full Stack Asp.net Core MVC Web Development Batch - 9
+# aspnet-b9
+
+I am using asp.net mvc
+
+This is our asp.net mvc project
+
