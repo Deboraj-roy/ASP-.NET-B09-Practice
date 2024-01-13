@@ -45,12 +45,19 @@ namespace Exam1.Application.Feature
             return await _unitOfWork.ProductRepository.GetByIdAsync(id);
         }
 
-        public async Task UpdateProductAsync(Product product)
+        public async Task UpdateProductAsync(Product productUp)
         {
-            var newProduct = await GetProductAsync(product.Id);
+            var newProduct = await GetProductAsync(productUp.Id);
             if (newProduct is not null)
             {
-                newProduct = product;
+                //newProduct = productUp;
+                newProduct.Id = productUp.Id;
+                newProduct.Name = productUp.Name;
+                newProduct.Price = productUp.Price;
+                newProduct.Weight = productUp.Weight;
+                Console.WriteLine(newProduct.Name);
+                Console.WriteLine(newProduct.Price);
+                Console.WriteLine(newProduct.Weight); 
             }
             await _unitOfWork.SaveAsync();
         }
