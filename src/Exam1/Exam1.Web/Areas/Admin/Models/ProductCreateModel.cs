@@ -8,7 +8,7 @@ namespace Exam1.Web.Areas.Admin.Models
     {
         private ILifetimeScope _scope;
         private IProductManagementService _productManagementService;
-        //public Product pp {  get; set; }
+         
         public string ProductName { get; set; }
         public uint ProductPrice { get; set; }
         public double ProductWeight { get; set; }
