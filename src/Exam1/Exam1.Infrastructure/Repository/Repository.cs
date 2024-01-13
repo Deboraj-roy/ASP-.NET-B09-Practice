@@ -15,7 +15,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Exam1.Infrastructure.Repositories;
+using Exam1.Infrastructure.Repository;
 
 namespace Exam1.Infrastructure.Repository
 {
