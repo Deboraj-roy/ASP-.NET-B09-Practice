@@ -1,21 +1,9 @@
 ﻿using Exam1.Domain.Entity;
-using Exam1.Domain;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
-using System.Data.SqlTypes;
-using System.Globalization;
-using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Exam1.Infrastructure.Repository;
 
 namespace Exam1.Infrastructure.Repository
 {

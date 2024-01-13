@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Exam1.Domain.Entity;
 using Exam1.Domain.Feature;
 
 namespace Exam1.Web.Areas.Admin.Models

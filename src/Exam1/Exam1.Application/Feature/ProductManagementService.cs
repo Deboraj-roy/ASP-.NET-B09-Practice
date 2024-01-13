@@ -1,10 +1,5 @@
 ﻿using Exam1.Domain.Entity;
 using Exam1.Domain.Feature;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Exam1.Application.Feature
 {

@@ -1,8 +1,6 @@
 ﻿using Autofac;
 using Exam1.Domain.Entity;
 using Exam1.Domain.Feature;
-using System.ComponentModel.DataAnnotations;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace Exam1.Web.Areas.Admin.Models
 {

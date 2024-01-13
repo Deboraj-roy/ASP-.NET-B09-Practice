@@ -2,11 +2,6 @@
 using Exam1.Application;
 using Exam1.Domain.Repository;
 using Exam1.Infrastructure.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Exam1.Infrastructure
 {
