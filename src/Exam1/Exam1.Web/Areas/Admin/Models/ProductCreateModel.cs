@@ -15,10 +15,10 @@ namespace Exam1.Web.Areas.Admin.Models
 
         public ProductCreateModel()
         {
-            
+
         }
         public ProductCreateModel(IProductManagementService productManagementService)
-        { 
+        {
             _productManagementService = productManagementService;
         }
         public void Resolve(ILifetimeScope scope)
