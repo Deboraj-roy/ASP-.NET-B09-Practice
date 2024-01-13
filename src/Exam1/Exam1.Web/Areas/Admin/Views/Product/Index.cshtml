@@ -116,9 +116,9 @@
                     type: "POST",
                     data: function (d) {
                         d.SearchModel = {
-                            ProductName: $("#SearchModel_Name").val(),
-                            ProductPriceFrom: $("#SearchModel_PriceFrom").val() == "" ? null : $("#SearchModel_PriceFrom").val(),
-                            ProductPriceTo: $("#SearchModel_PriceTo").val() == "" ? null : $("#SearchModel_PriceTo").val()
+                            ProductName: $("#SearchModel_ProductName").val(),
+                            ProductPriceFrom: $("#SearchModel_ProductPriceFrom").val() == "" ? null : $("#SearchModel_ProductPriceFrom").val(),
+                            ProductPriceTo: $("#SearchModel_ProductPriceTo").val() == "" ? null : $("#SearchModel_ProductPriceTo").val()
                         };
                         console.log("Data sent to server:", d); // Add this line for debugging
                     },
