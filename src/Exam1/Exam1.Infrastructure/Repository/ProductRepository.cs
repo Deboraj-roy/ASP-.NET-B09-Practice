@@ -1,5 +1,6 @@
 ﻿using Exam1.Domain.Entity;
 using Exam1.Domain.Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Exam1.Infrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public Task<bool> IsNameDuplicateAsync(string name, Guid? id = null)
+        public async Task<bool> IsNameDuplicateAsync(string name, Guid? id = null)
         {
             if (id.HasValue)
             {
@@ -24,7 +25,7 @@ namespace Exam1.Infrastructure.Repository
             }
             else
             {
-                return (await GetCountAsync(x.Name == name) > 0);
+                return (await GetCountAsync(x => x.Name == name) > 0);
             }
         }
     }
