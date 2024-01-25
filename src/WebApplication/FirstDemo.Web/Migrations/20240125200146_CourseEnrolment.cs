@@ -30,7 +30,7 @@ namespace FirstDemo.Web.Migrations
                 {
                     CourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     StudentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    EnrolmentDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    EnrollmentDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

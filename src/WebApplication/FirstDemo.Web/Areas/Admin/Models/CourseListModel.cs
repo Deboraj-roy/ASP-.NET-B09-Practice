@@ -1,9 +1,9 @@
 ﻿using Autofac;
 using FirstDemo.Application.Features.Training;
-using FirstDemo.Domain.Features.Training;
 using static System.Formats.Asn1.AsnWriter;
 using FirstDemo.Infrastructure;
 using System.Web;
+using FirstDemo.Application.Features.Training.Services;
 
 namespace FirstDemo.Web.Areas.Admin.Models
 {

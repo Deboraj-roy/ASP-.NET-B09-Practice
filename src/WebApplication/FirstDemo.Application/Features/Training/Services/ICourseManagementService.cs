@@ -1,11 +1,12 @@
-﻿using FirstDemo.Domain.Entities;
+﻿using FirstDemo.Application.Features.Training.DTOs;
+using FirstDemo.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FirstDemo.Domain.Features.Training
+namespace FirstDemo.Application.Features.Training.Services
 {
     public interface ICourseManagementService
     {
@@ -16,5 +17,9 @@ namespace FirstDemo.Domain.Features.Training
             GetPagedCoursesAsync(int pageIndex, int pageSize, string searchTitle, uint searchFeeFrom,
             uint searchFeeTo, string sortBy);
         Task UpdateCourseAsync(Guid id, string title, string description, uint fees);
+        Task<(IList<CourseEnrollmentDTO> records, int total, int totalDisplay)>
+            GetCourseEnrollmentsAsync(int pageIndex, int pageSize, string orderBy,
+            string courseName, string studentName, DateTime enrollmentDateFrom,
+            DateTime enrollmentDateTo);
     }
 }

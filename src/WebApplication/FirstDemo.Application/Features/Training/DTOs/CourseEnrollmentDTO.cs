@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FirstDemo.Domain.Entities
+namespace FirstDemo.Application.Features.Training.DTOs
 {
-    public class CourseEnrollment
+    public class CourseEnrollmentDTO
     {
-        public Guid CourseId { get; set; }
-        public Guid StudentId { get; set; }
+        public string StudentName { get; set; }
+        public string CourseName { get; set; }
         public DateTime EnrollmentDate { get; set; }
     }
 }

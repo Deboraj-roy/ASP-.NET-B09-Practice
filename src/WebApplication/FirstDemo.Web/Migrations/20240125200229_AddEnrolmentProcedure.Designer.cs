@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FirstDemo.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240125063748_CourseEnrolment")]
-    partial class CourseEnrolment
+    [Migration("20240125200229_AddEnrolmentProcedure")]
+    partial class AddEnrolmentProcedure
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,7 +71,7 @@ namespace FirstDemo.Web.Migrations
                     b.Property<Guid>("StudentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("EnrolmentDate")
+                    b.Property<DateTime>("EnrollmentDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("CourseId", "StudentId");

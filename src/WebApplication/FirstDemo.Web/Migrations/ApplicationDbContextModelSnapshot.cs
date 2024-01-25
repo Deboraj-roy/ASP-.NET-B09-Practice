@@ -68,7 +68,7 @@ namespace FirstDemo.Web.Migrations
                     b.Property<Guid>("StudentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("EnrolmentDate")
+                    b.Property<DateTime>("EnrollmentDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("CourseId", "StudentId");

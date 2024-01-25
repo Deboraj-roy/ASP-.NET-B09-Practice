@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace FirstDemo.Infrastructure
 {
-    public class AdoNetUtility
+    public class AdoNetUtility : IAdoNetUtility
     {
         private readonly DbConnection _connection;
         private readonly int _timeout;
 
-        public AdoNetUtility(DbConnection connection, int timeout)
+        public AdoNetUtility(DbConnection connection, int timeout = 0)
         {
             _connection = connection;
             _timeout = timeout;
@@ -35,14 +35,16 @@ namespace FirstDemo.Infrastructure
                 connectionOpened = true;
             }
 
+            DbTransaction transaction = command.Connection.BeginTransaction();
+
             try
             {
                 command.ExecuteNonQuery();
+                transaction.Commit();
             }
-            finally
+            catch(DbException dex)
             {
-                if (connectionOpened)
-                    command.Connection.Close();
+                transaction.Rollback();
             }
 
             return CopyOutParams(command, outParameters);
@@ -61,14 +63,16 @@ namespace FirstDemo.Infrastructure
                 connectionOpened = true;
             }
 
+            DbTransaction transaction = command.Connection.BeginTransaction();
+
             try
             {
                 await command.ExecuteNonQueryAsync();
+                await transaction.CommitAsync();
             }
-            finally
+            catch(DbException dex)
             {
-                if (connectionOpened)
-                    await command.Connection.CloseAsync();
+               transaction.RollbackAsync();
             }
 
             return CopyOutParams(command, outParameters);

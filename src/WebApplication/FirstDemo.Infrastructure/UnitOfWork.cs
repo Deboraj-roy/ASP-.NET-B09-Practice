@@ -11,9 +11,13 @@ namespace FirstDemo.Infrastructure
     public abstract class UnitOfWork : IUnitOfWork
     {
         private readonly DbContext _dbContext;
+        protected IAdoNetUtility AdoNetUtility { get; private set; }
 
-        public UnitOfWork(DbContext dbContext) => _dbContext = dbContext;
-
+        public UnitOfWork(DbContext dbContext)
+        {
+            _dbContext = dbContext;
+            AdoNetUtility = new AdoNetUtility(_dbContext.Database.GetDbConnection());
+        }
         public virtual void Dispose() => _dbContext?.Dispose();
 
         public virtual async ValueTask DisposeAsync() => await _dbContext.DisposeAsync();

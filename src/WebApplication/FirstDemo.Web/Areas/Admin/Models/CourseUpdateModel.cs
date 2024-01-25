@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using AutoMapper;
+using FirstDemo.Application.Features.Training.Services;
 using FirstDemo.Domain.Entities;
-using FirstDemo.Domain.Features.Training;
 using System.ComponentModel.DataAnnotations;
 
 namespace FirstDemo.Web.Areas.Admin.Models

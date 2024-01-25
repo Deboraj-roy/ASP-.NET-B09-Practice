@@ -1,13 +1,14 @@
-﻿using FirstDemo.Domain.Entities;
+﻿using FirstDemo.Application.Features.Training.DTOs;
+using FirstDemo.Domain.Entities;
 using FirstDemo.Domain.Exceptions;
-using FirstDemo.Domain.Features.Training;
+using FirstDemo.Application.Features.Training.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FirstDemo.Application.Features.Training
+namespace FirstDemo.Application.Features.Training.Services
 {
     public class CourseManagementService : ICourseManagementService
     {
@@ -46,7 +47,7 @@ namespace FirstDemo.Application.Features.Training
             return await _unitOfWork.CourseRepository.GetByIdAsync(id);
         }
 
-        public async Task<(IList<Course> records, int total, int totalDisplay)> 
+        public async Task<(IList<Course> records, int total, int totalDisplay)>
             GetPagedCoursesAsync(int pageIndex, int pageSize, string searchTitle, uint searchFeeFrom, uint searchFeeTo, string sortBy)
         {
             return await _unitOfWork.CourseRepository.GetTableDataAsync(searchTitle, searchFeeFrom, searchFeeTo, sortBy, pageIndex, pageSize);
@@ -56,11 +57,11 @@ namespace FirstDemo.Application.Features.Training
         public async Task UpdateCourseAsync(Guid id, string title, string description, uint fees)
         {
             bool isDuplicateTitle = await _unitOfWork.CourseRepository
-                .IsTitleDuplicateAsync(title,id);
+                .IsTitleDuplicateAsync(title, id);
             if (isDuplicateTitle)
                 throw new DuplicateTitleException();
             var course = await GetCourseAsync(id);
-            if(course is not null)
+            if (course is not null)
             {
                 course.Title = title;
                 course.Description = description;
@@ -68,6 +69,15 @@ namespace FirstDemo.Application.Features.Training
             }
 
             await _unitOfWork.SaveAsync();
+        }
+        public async Task<(IList<CourseEnrollmentDTO> records, int total, int totalDisplay)>
+            GetCourseEnrollmentsAsync(int pageIndex, int pageSize, string orderBy,
+            string courseName, string studentName, DateTime enrollmentDateFrom,
+            DateTime enrollmentDateTo)
+        {
+            return await _unitOfWork.GetCourseEnrollmentsAsync(
+                pageIndex, pageSize, orderBy, courseName,
+                studentName, enrollmentDateFrom, enrollmentDateTo);
         }
     }
 

@@ -30,39 +30,39 @@ namespace FirstDemo.Web.Migrations
 	
 							SET NOCOUNT ON;
 
-							Select @Total = count(*) from CourseStudent;
-							SET @countsql = 'select @TotalDisplay = count(*) from CourseStudent cs inner join 
+							Select @Total = count(*) from CourseEnrollments;
+							SET @countsql = 'select @TotalDisplay = count(*) from CourseEnrollments cs inner join 
 											Courses c on cs.CourseId = c.Id inner join
 											Students s on cs.StudentId = s.Id  where 1 = 1 ';
 	
 							IF @CourseName IS NOT NULL
-							SET @countsql = @countsql + ' AND c.Name LIKE ''%'' + @xCourseName + ''%''' 
+							SET @countsql = @countsql + ' AND c.Title LIKE ''%'' + @xCourseName + ''%''' 
 
 							IF @StudentName IS NOT NULL
 							SET @countsql = @countsql + ' AND s.Name LIKE ''%'' + @xStudentName + ''%''' 
 
 							IF @EnrollmentDateFrom IS NOT NULL
-							SET @countsql = @countsql + ' AND EnrollDate >= @xEnrollmentDateFrom'
+							SET @countsql = @countsql + ' AND EnrollmentDate >= @xEnrollmentDateFrom'
 
 							IF @EnrollmentDateTo IS NOT NULL
-							SET @countsql = @countsql + ' AND EnrollDate <= @xEnrollmentDateTo' 
+							SET @countsql = @countsql + ' AND EnrollmentDate <= @xEnrollmentDateTo' 
 
 
-							SET @sql = 'select c.Name as CourseName, s.Name as StudentName, EnrollDate from CourseStudent cs inner join 
+							SET @sql = 'select c.Title as CourseName, s.Name as StudentName, EnrollmentDate from CourseEnrollments cs inner join 
 										Courses c on cs.CourseId = c.Id inner join
 										Students s on cs.StudentId = s.Id where 1 = 1 '; 
 
 							IF @CourseName IS NOT NULL
-							SET @sql = @sql + ' AND c.Name LIKE ''%'' + @xCourseName + ''%''' 
+							SET @sql = @sql + ' AND c.Title LIKE ''%'' + @xCourseName + ''%''' 
 
 							IF @StudentName IS NOT NULL
 							SET @sql = @sql + ' AND s.Name LIKE ''%'' + @xStudentName + ''%''' 
 
 							IF @EnrollmentDateFrom IS NOT NULL
-							SET @sql = @sql + ' AND EnrollDate >= @xEnrollmentDateFrom'
+							SET @sql = @sql + ' AND EnrollmentDate >= @xEnrollmentDateFrom'
 
 							IF @EnrollmentDateTo IS NOT NULL
-							SET @sql = @sql + ' AND EnrollDate <= @xEnrollmentDateTo' 
+							SET @sql = @sql + ' AND EnrollmentDate <= @xEnrollmentDateTo' 
 
 							SET @sql = @sql + ' Order by '+@OrderBy+' OFFSET @PageSize * (@PageIndex - 1) 
 							ROWS FETCH NEXT @PageSize ROWS ONLY';

@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using FirstDemo.Application.Features.Training;
-using FirstDemo.Domain.Features.Training;
+using FirstDemo.Application.Features.Training.Services;
 
 namespace FirstDemo.Web.Areas.Admin.Models
 {
