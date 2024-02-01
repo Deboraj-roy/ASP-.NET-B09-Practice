@@ -9,6 +9,7 @@ using Serilog.Events;
 using FirstDemo.Application;
 using FirstDemo.Infrastructure;
 using System.Reflection;
+using FirstDemo.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((ctx, lc) => lc
@@ -40,9 +41,10 @@ try
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
     builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-    builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-        .AddEntityFrameworkStores<ApplicationDbContext>();
+    builder.Services.AddIdentity();
+
     builder.Services.AddControllersWithViews();
+    builder.Services.AddCookieAuthentication();
     builder.Services.AddScoped<IEmailSender, HtmlEmailSender>();
 
     var app = builder.Build();
