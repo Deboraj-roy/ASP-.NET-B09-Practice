@@ -1,5 +1,7 @@
 ﻿using Autofac;
+using Azure;
 using FirstDemo.Web.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FirstDemo.Web.Controllers
@@ -13,10 +15,6 @@ namespace FirstDemo.Web.Controllers
             _scope = scope;
             _logger = logger;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
         public IActionResult Register()
         {
             var model = _scope.Resolve<RegistrationModel>();
@@ -25,22 +23,24 @@ namespace FirstDemo.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegistrationModel model)
         {
-            IList<string> errors = new List<string>();
+            (IEnumerable<IdentityError>? errors, string? redirectLocation) response = (null, null);
+           
             if (ModelState.IsValid)
             {
                 model.Resolve(_scope);
-                await model.Register();
+                response = await model.RegisterAsync(Url.Content("~/"));
             }
 
-            if (errors.Count > 0)
+            if (response.errors is not null)
             {
-                foreach (var error in errors)
+                foreach (var error in response.errors)
                 {
-                    ModelState.AddModelError(string.Empty, error);
+                    ModelState.AddModelError(string.Empty, error.Description);
                 }
+                return View(model);
             }
-
-            return View(model);
+            else
+                return Redirect(response.redirectLocation);
         }
     }
 }
