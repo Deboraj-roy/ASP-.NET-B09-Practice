@@ -9,8 +9,7 @@ namespace FirstDemo.Infrastructure
         ApplicationRole, Guid,
         ApplicationUserClaim, ApplicationUserRole,
         ApplicationUserLogin, ApplicationRoleClaim,
-        ApplicationUserToken>,
-        IApplicationDbContext
+        ApplicationUserToken>, IApplicationDbContext
     {
         private readonly string _connectionString;
         private readonly string _migrationAssembly;

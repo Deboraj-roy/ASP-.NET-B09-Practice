@@ -10,21 +10,25 @@ namespace FirstDemo.Web.Controllers
     {
         private readonly ILifetimeScope _scope;
         private readonly ILogger<AccountController> _logger;
-        public AccountController(ILifetimeScope scope, ILogger<AccountController> logger)
+
+        public AccountController(ILifetimeScope scope,
+            ILogger<AccountController> logger)
         {
             _scope = scope;
             _logger = logger;
         }
+
         public IActionResult Register()
         {
             var model = _scope.Resolve<RegistrationModel>();
             return View(model);
         }
+
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegistrationModel model)
         {
             (IEnumerable<IdentityError>? errors, string? redirectLocation) response = (null, null);
-           
+
             if (ModelState.IsValid)
             {
                 model.Resolve(_scope);

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FirstDemo.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240217080527_AddColumnInUserTable")]
+    [Migration("20240220192117_AddColumnInUserTable")]
     partial class AddColumnInUserTable
     {
         /// <inheritdoc />
