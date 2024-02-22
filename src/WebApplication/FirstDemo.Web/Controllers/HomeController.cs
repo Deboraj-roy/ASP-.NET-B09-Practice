@@ -7,13 +7,11 @@ namespace FirstDemo.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
 
-        public HomeController(ILogger<HomeController> logger, IEmailSender emailSender, ISmsSender smsSender)
+        public HomeController(ILogger<HomeController> logger, ISmsSender smsSender)
         {
             _logger = logger;
-            _emailSender = emailSender;
             _smsSender = smsSender;
         }
 

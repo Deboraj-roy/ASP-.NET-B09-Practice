@@ -10,6 +10,7 @@ using FirstDemo.Application;
 using FirstDemo.Infrastructure;
 using System.Reflection;
 using FirstDemo.Infrastructure.Extensions;
+using FirstDemo.Infrastructure.Email;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((ctx, lc) => lc
@@ -45,7 +46,7 @@ try
 
     builder.Services.AddControllersWithViews();
     builder.Services.AddCookieAuthentication();
-    builder.Services.AddScoped<IEmailSender, HtmlEmailSender>();
+    builder.Services.Configure<Smtp>(builder.Configuration.GetSection("Smtp"));
 
     var app = builder.Build();
 

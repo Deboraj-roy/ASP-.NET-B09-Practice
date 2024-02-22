@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using FirstDemo.Application;
+using FirstDemo.Application.Utilities;
 using FirstDemo.Domain.Repositories;
+using FirstDemo.Infrastructure.Email;
 using FirstDemo.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
@@ -36,6 +38,9 @@ namespace FirstDemo.Infrastructure
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<CourseRepository>().As<ICourseRepository>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<HtmlEmailService>().As<IEmailService>()
                 .InstancePerLifetimeScope();
         }
     }
