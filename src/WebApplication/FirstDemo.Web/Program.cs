@@ -11,6 +11,7 @@ using FirstDemo.Infrastructure;
 using System.Reflection;
 using FirstDemo.Infrastructure.Extensions;
 using FirstDemo.Infrastructure.Email;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((ctx, lc) => lc
@@ -47,6 +48,10 @@ try
     builder.Services.AddControllersWithViews();
     builder.Services.AddCookieAuthentication();
     builder.Services.Configure<Smtp>(builder.Configuration.GetSection("Smtp"));
+
+    //For Docker container
+    builder.Services.Configure<KestrelServerOptions>(builder.Configuration.GetSection("Kestrel"));
+    //builder.WebHost.UseUrls("http://*:80");
 
     var app = builder.Build();
 
