@@ -1,12 +1,16 @@
 ﻿using Autofac;
 using FirstDemo.Domain.Exceptions;
 using FirstDemo.Infrastructure;
+using FirstDemo.Infrastructure.Membership;
 using FirstDemo.Web.Areas.Admin.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace FirstDemo.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = UserRoles.Supervisor)]
     public class CourseController : Controller
     {
         private readonly ILifetimeScope _scope;
@@ -19,18 +23,20 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
             _logger = logger;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
 
+        [Authorize(Roles = UserRoles.Admin)]
         public IActionResult Create()
         {
             var model = _scope.Resolve<CourseCreateModel>();
             return View(model);
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> Create(CourseCreateModel model)
         {
             if (ModelState.IsValid)
@@ -47,7 +53,7 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
 
                     return RedirectToAction("Index");
                 }
-                catch(DuplicateTitleException de)
+                catch (DuplicateTitleException de)
                 {
                     TempData.Put("ResponseMessage", new ResponseModel
                     {
@@ -97,6 +103,7 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
             return Json(data);
         }
 
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> Update(Guid id)
         {
             var model = _scope.Resolve<CourseUpdateModel>();
@@ -104,7 +111,7 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> Update(CourseUpdateModel model)
         {
             model.Resolve(_scope);
