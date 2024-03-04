@@ -23,7 +23,7 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
             _logger = logger;
         }
 
-        [AllowAnonymous]
+        [Authorize(Policy = "CourseViewRequirementPolicy")]
         public IActionResult Index()
         {
             return View();

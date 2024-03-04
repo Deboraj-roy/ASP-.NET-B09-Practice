@@ -13,6 +13,8 @@ using FirstDemo.Infrastructure.Extensions;
 using FirstDemo.Infrastructure.Email;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using FirstDemo.Infrastructure.Membership;
+using Microsoft.AspNetCore.Authorization;
+using FirstDemo.Infrastructure.Requirements;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((ctx, lc) => lc
@@ -71,12 +73,14 @@ try
             policy.RequireClaim("UpdateCourse", "true");
         });
 
-        //options.AddPolicy("CourseViewRequirementPolicy", policy =>
-        //{
-        //    policy.RequireAuthenticatedUser();
-        //    policy.Requirements.Add(new CourseViewRequirement());
-        //});
+        options.AddPolicy("CourseViewRequirementPolicy", policy =>
+        {
+            policy.RequireAuthenticatedUser();
+            policy.Requirements.Add(new CourseViewRequirement());
+        });
     });
+
+    builder.Services.AddSingleton<IAuthorizationHandler, CourseViewRequirementHandler>();
 
     //For Docker container
     builder.Services.Configure<KestrelServerOptions>(builder.Configuration.GetSection("Kestrel"));
