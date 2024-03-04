@@ -59,8 +59,8 @@ namespace FirstDemo.Web.Models
             var result = await _userManager.CreateAsync(user, Password);
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user, UserRoles.Admin);
-                await _userManager.AddToRoleAsync(user, UserRoles.Supervisor);
+                //await _userManager.AddToRoleAsync(user, UserRoles.Admin);
+                //await _userManager.AddToRoleAsync(user, UserRoles.Supervisor);
 
                 /*
                                 if (!await _userManager.IsInRoleAsync(user, UserRoles.Supervisor))
@@ -68,6 +68,9 @@ namespace FirstDemo.Web.Models
                                     await _userManager.AddToRoleAsync(user, UserRoles.Supervisor);
                                 }
                  */
+
+                await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("UpdateCourse", "true"));
+                await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("ViewCourse", "true"));
 
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

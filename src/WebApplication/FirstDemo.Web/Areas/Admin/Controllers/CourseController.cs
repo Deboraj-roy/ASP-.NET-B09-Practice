@@ -10,7 +10,7 @@ using System.Data;
 namespace FirstDemo.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = UserRoles.Supervisor)]
+    [Authorize]
     public class CourseController : Controller
     {
         private readonly ILifetimeScope _scope;
@@ -104,7 +104,7 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
             return Json(data);
         }
 
-        [Authorize(Roles = UserRoles.Admin)]
+        [Authorize(Policy = "CourseUpdatePolicy")]
         public async Task<IActionResult> Update(Guid id)
         {
             var model = _scope.Resolve<CourseUpdateModel>();
@@ -112,7 +112,7 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        [HttpPost, ValidateAntiForgeryToken, Authorize(Roles = UserRoles.Admin)]
+        [HttpPost, ValidateAntiForgeryToken, Authorize(Policy = "CourseUpdatePolicy")]
         public async Task<IActionResult> Update(CourseUpdateModel model)
         {
             model.Resolve(_scope);

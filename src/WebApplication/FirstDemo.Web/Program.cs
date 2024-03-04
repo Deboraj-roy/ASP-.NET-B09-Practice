@@ -59,11 +59,18 @@ try
             policy.RequireRole(UserRoles.Supervisor);
         });
 
-        //options.AddPolicy("CourseViewPolicy", policy =>
-        //{
-        //    policy.RequireAuthenticatedUser();
-        //    policy.RequireClaim("ViewCourse", "true");
-        //});
+        options.AddPolicy("CourseViewPolicy", policy =>
+        {
+            policy.RequireAuthenticatedUser();
+            policy.RequireClaim("ViewCourse", "true");
+        });
+
+        options.AddPolicy("CourseUpdatePolicy", policy =>
+        {
+            policy.RequireAuthenticatedUser();
+            policy.RequireClaim("UpdateCourse", "true");
+        });
+
         //options.AddPolicy("CourseViewRequirementPolicy", policy =>
         //{
         //    policy.RequireAuthenticatedUser();
