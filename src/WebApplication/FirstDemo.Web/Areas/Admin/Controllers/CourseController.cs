@@ -78,6 +78,7 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        //[AllowAnonymous]
         public async Task<JsonResult> GetCourses(CourseListModel model)
         {
             var dataTablesModel = new DataTablesAjaxRequestUtility(Request);
@@ -150,7 +151,7 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Authorize(Policy = "SupperAdmin")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var model = _scope.Resolve<CourseListModel>();

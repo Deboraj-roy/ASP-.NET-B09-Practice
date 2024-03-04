@@ -12,6 +12,7 @@ using System.Reflection;
 using FirstDemo.Infrastructure.Extensions;
 using FirstDemo.Infrastructure.Email;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using FirstDemo.Infrastructure.Membership;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((ctx, lc) => lc
@@ -48,6 +49,27 @@ try
     builder.Services.AddControllersWithViews();
     builder.Services.AddCookieAuthentication();
     builder.Services.Configure<Smtp>(builder.Configuration.GetSection("Smtp"));
+
+    builder.Services.AddAuthorization( options =>
+    {
+        options.AddPolicy("SupperAdmin", policy =>
+        {
+            policy.RequireAuthenticatedUser();
+            policy.RequireRole(UserRoles.Admin);
+            policy.RequireRole(UserRoles.Supervisor);
+        });
+
+        //options.AddPolicy("CourseViewPolicy", policy =>
+        //{
+        //    policy.RequireAuthenticatedUser();
+        //    policy.RequireClaim("ViewCourse", "true");
+        //});
+        //options.AddPolicy("CourseViewRequirementPolicy", policy =>
+        //{
+        //    policy.RequireAuthenticatedUser();
+        //    policy.Requirements.Add(new CourseViewRequirement());
+        //});
+    });
 
     //For Docker container
     builder.Services.Configure<KestrelServerOptions>(builder.Configuration.GetSection("Kestrel"));
