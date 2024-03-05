@@ -38,7 +38,7 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
 
         [HttpPost, ValidateAntiForgeryToken, Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> Create(CourseCreateModel model)
-        {
+        { 
             if (ModelState.IsValid)
             {
                 try

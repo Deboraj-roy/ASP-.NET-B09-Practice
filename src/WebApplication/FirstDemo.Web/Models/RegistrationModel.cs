@@ -75,9 +75,8 @@ namespace FirstDemo.Web.Models
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                 var callbackUrl = $"{urlPrefix}/Account/ConfirmEmail?userId={user.Id}&code={code}&returnUrl={ReturnUrl}";
-
-
-                 _emailService.SendSingleEmail(FirstName + " " + LastName, Email, "Confirm your email",
+                 
+                _emailService.SendSingleEmail(FirstName + " " + LastName, Email, "Confirm your email",
                     $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
 
