@@ -1,8 +1,10 @@
 ﻿using FirstDemo.Infrastructure.Membership;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,5 +60,26 @@ namespace FirstDemo.Infrastructure.Extensions
                     options.ExpireTimeSpan = TimeSpan.FromHours(1);
                 });
         }
+
+        public static void AddJwtAuthentication(this IServiceCollection services,
+            string key, string issuer, string audience)
+        {
+            services.AddAuthentication()
+                .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, x =>
+                {
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key)),
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidIssuer = issuer,
+                        ValidAudience = audience,
+                    };
+                });
+        }
+
     }
 }

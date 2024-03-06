@@ -4,6 +4,7 @@ using FirstDemo.Application.Utilities;
 using FirstDemo.Domain.Repositories;
 using FirstDemo.Infrastructure.Email;
 using FirstDemo.Infrastructure.Repositories;
+using FirstDemo.Infrastructure.Membership;
 using System;
 using System.Collections.Generic;
 using System.Linq; 
@@ -42,6 +43,9 @@ namespace FirstDemo.Infrastructure
 
             builder.RegisterType<HtmlEmailService>().As<IEmailService>()
                 .InstancePerLifetimeScope();
+
+            builder.RegisterType<TokenService>().As<ITokenService>()
+               .InstancePerLifetimeScope();
         }
     }
 }
