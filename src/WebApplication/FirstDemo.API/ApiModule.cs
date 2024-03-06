@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using FirstDemo.API.RequestHandlers;
 
 namespace FirstDemo.API
 {
@@ -6,7 +7,7 @@ namespace FirstDemo.API
     {
         protected override void Load(ContainerBuilder builder)
         {
-            //builder.RegisterType<ViewCourseRequestHandler>().AsSelf();
+            builder.RegisterType<ViewCourseRequestHandler>().AsSelf();
 
             base.Load(builder);
         }

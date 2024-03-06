@@ -79,6 +79,11 @@ namespace FirstDemo.Application.Features.Training.Services
                 pageIndex, pageSize, orderBy, courseName,
                 studentName, enrollmentDateFrom, enrollmentDateTo);
         }
+
+        public async Task<IList<Course>>? GetCoursesAsync()
+        {
+            return await _unitOfWork.CourseRepository.GetAllAsync();
+        }
     }
 
 }

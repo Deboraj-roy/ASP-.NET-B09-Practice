@@ -21,5 +21,6 @@ namespace FirstDemo.Application.Features.Training.Services
             GetCourseEnrollmentsAsync(int pageIndex, int pageSize, string orderBy,
             string courseName, string studentName, DateTime enrollmentDateFrom,
             DateTime enrollmentDateTo);
+        Task<IList<Course>>? GetCoursesAsync();
     }
 }
