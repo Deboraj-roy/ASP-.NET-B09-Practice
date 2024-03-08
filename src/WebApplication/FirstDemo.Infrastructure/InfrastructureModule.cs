@@ -4,12 +4,14 @@ using FirstDemo.Application.Utilities;
 using FirstDemo.Domain.Repositories;
 using FirstDemo.Infrastructure.Email;
 using FirstDemo.Infrastructure.Repositories;
+using FirstDemo.Infrastructure.Requirements;
 using FirstDemo.Infrastructure.Membership;
 using System;
 using System.Collections.Generic;
 using System.Linq; 
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FirstDemo.Infrastructure
 {

@@ -4,6 +4,7 @@ using FirstDemo.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using FirstDemo.Infrastructure.Membership;
 
 namespace FirstDemo.API.Controllers
 {
@@ -37,8 +38,9 @@ namespace FirstDemo.API.Controllers
         */
 
 
-        [HttpGet]
-        [Authorize(Policy = "CourseViewRequirementPolicy")]
+        //[HttpGet]
+        [HttpGet, Authorize(Policy = "CourseViewRequirementPolicy")]
+        //[HttpGet, Authorize(Policy = "CourseViewPolicy")]
         public async Task<IEnumerable<Course>> Get()
         {
             try
@@ -53,7 +55,9 @@ namespace FirstDemo.API.Controllers
             }
         }
 
+
         [HttpGet("{id}")]
+        //[Authorize(Policy = "CourseViewRequirementPolicy")]
         public async Task<Course> Get(Guid id)
         {
             var model = _scope.Resolve<ViewCourseRequestHandler>();
