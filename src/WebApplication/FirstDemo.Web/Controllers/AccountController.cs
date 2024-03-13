@@ -68,10 +68,9 @@ namespace FirstDemo.Web.Controllers
 
         public async Task<IActionResult> LoginAsync(string returnUrl = null)
         {
-            var baseUrl = $"{Request.Scheme}://{Request.Host}";
-            //returnUrl ??= Url.Content("~/");
+            //var baseUrl = $"{Request.Scheme}://{Request.Host}";
             //returnUrl ??= baseUrl;
-            returnUrl ??= baseUrl;
+            returnUrl ??= Url.Content("~/"); 
 
             var model = _scope.Resolve<LoginModel>();
 
@@ -85,10 +84,10 @@ namespace FirstDemo.Web.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> LoginAsync(LoginModel model)
         {
-            var baseUrl = $"{Request.Scheme}://{Request.Host}";
-            //model.ReturnUrl ??= Url.Content("~/");
+            //var baseUrl = $"{Request.Scheme}://{Request.Host}";
+            //model.ReturnUrl ??= baseUrl;
+            model.ReturnUrl ??= Url.Content("~/");
 
-            model.ReturnUrl ??= baseUrl;
 
             if (ModelState.IsValid)
             {
