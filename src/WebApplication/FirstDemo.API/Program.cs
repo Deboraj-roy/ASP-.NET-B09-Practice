@@ -54,7 +54,7 @@ try
         });
     });
 
-   // builder.Services.AddSingleton<IAuthorizationHandler, CourseViewRequirementHandler>();
+    builder.Services.AddSingleton<IAuthorizationHandler, CourseViewRequirementHandler>();
 
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
