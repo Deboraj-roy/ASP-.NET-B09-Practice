@@ -2,6 +2,7 @@
 using AutoMapper;
 using FirstDemo.Application.Features.Training.Services;
 using FirstDemo.Domain.Entities;
+using FirstDemo.Infrastructure;
 
 namespace FirstDemo.API.RequestHandlers
 {
@@ -14,6 +15,8 @@ namespace FirstDemo.API.RequestHandlers
         public string Name { get; set; }
         public uint Fees { get; set; }
         public string Description { get; set; }
+
+        public CourseSearch SearchItem { get; set; }
 
         public ViewCourseRequestHandler()
         {
@@ -62,28 +65,31 @@ namespace FirstDemo.API.RequestHandlers
             return await _courseService?.GetCourseAsync(id);
         }
 
-        //internal async Task<object?> GetPagedCourses(DataTablesAjaxRequestUtility model)
-        //{
+        internal async Task<object?> GetPagedCourses(DataTablesAjaxRequestUtility model)
+        {
 
-        //    var data = await _courseService?.GetPagedCoursesAsync(
-        //        model.PageIndex,
-        //        model.PageSize,
-        //        model.SearchText,
-        //        model.GetSortText(new string[] { "Title", "Fees", "ClassStartDate" }));
+            var data = await _courseService?.GetPagedCoursesAsync(
+                model.PageIndex,
+                model.PageSize,
+                SearchItem.Title,
+                SearchItem.CourseFeesFrom,
+                SearchItem.CourseFeesTo,
+                model.GetSortText(new string[] { "Title", "Description", "Fees" }));
 
-        //    return new
-        //    {
-        //        recordsTotal = data.total,
-        //        recordsFiltered = data.totalDisplay,
-        //        data = (from record in data.records
-        //                select new string[]
-        //                {
-        //                        record.Name,
-        //                        record.Fees.ToString(),
-        //                        record.Id.ToString()
-        //                }
-        //            ).ToArray()
-        //    };
-        //}
+            return new
+            {
+                recordsTotal = data.total,
+                recordsFiltered = data.totalDisplay,
+                data = (from record in data.records
+                        select new string[]
+                        {
+                                record.Title,
+                                record.Description,
+                                record.Fees.ToString(),
+                                record.Id.ToString()
+                        }
+                    ).ToArray()
+            };
+        }
     }
 }

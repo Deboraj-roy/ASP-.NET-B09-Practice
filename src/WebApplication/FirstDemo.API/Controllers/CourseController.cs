@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using FirstDemo.Infrastructure.Membership;
+using FirstDemo.Infrastructure;
 
 namespace FirstDemo.API.Controllers
 {
@@ -22,26 +23,21 @@ namespace FirstDemo.API.Controllers
             _scope = scope;
         }
 
-        /*
-        [HttpGet, Authorize(Policy = "CourseViewRequirementPolicy")]
-        public object Get()
+
+        [HttpPost, Authorize(Policy = "CourseViewRequirementPolicy")]
+        public object Post([FromBody] ViewCourseRequestHandler handler)
         {
             _logger.LogInformation($"Origin:" + Request.Headers.Origin.Count);
-            for(int i = 0; i < Request.Headers.Origin.Count; i++)
-            {
-                _logger.LogInformation($"Origin:" + Request.Headers.Origin[i]);
-            }
-            var dataTablesModel = new DataTablesAjaxRequestModel(Request);
-            var model = _scope.Resolve<CourseModel>();
-            var data = model.GetPagedCourses(dataTablesModel);
+             
+            var dataTablesModel = new DataTablesAjaxRequestUtility(Request);
+
+            var data = handler.GetPagedCourses(dataTablesModel);
             return data;
         }
-        */
 
 
-        //[HttpGet]
+         /*
         [HttpGet, Authorize(Policy = "CourseViewRequirementPolicy")]
-        //[HttpGet, Authorize(Policy = "CourseViewPolicy")]
         public async Task<IEnumerable<Course>> Get()
         {
             try
@@ -55,7 +51,7 @@ namespace FirstDemo.API.Controllers
                 return null;
             }
         }
-
+*/
 
         [HttpGet("{id}")]
         //[Authorize(Policy = "CourseViewRequirementPolicy")]
