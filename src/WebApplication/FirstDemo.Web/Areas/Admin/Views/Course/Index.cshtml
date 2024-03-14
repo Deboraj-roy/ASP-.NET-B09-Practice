@@ -1,4 +1,6 @@
 ﻿@model CourseListModel
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "Courses";
 }
@@ -114,8 +116,11 @@
                 lengthChange: false,
                 autoWidth: false,
                 ajax: {
-                    url: "/Admin/Course/GetCourses",
+                    url: "https://localhost:7157/v3/Course",
                     type: "POST",
+                    Headers: {
+                        Authorization: 'Bearer @HttpContextAccessor.HttpContext.Session.GetString("token")'
+                    },
                     data: function (d) {
                         d.SearchItem = {
                             Title: $("#SearchItem_Title").val(),
