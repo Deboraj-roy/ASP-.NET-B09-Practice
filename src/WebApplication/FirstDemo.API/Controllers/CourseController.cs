@@ -10,6 +10,7 @@ namespace FirstDemo.API.Controllers
 {
     [ApiController]
     [Route("v3/[controller]")]
+    [EnableCors("AllowSites")]
     public class CourseController : ControllerBase
     {
         private readonly ILifetimeScope _scope;

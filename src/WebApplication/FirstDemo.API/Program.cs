@@ -54,6 +54,19 @@ try
         });
     });
 
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowSites",
+            builder =>
+            {
+                //use your web apps port and localhost
+                //builder.WithOrigins("https://localhost:7159")
+                builder.WithOrigins("https://localhost")
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+            });
+    });
+
     builder.Services.AddSingleton<IAuthorizationHandler, CourseViewRequirementHandler>();
 
     builder.Services.AddControllers();
@@ -63,13 +76,7 @@ try
     var app = builder.Build();
 
     Log.Information("Application Starting...");
-
-    /*    builder.Services.AddControllers();
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
-
-        var app = builder.Build();*/
+ 
 
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
@@ -79,7 +86,7 @@ try
     }
 
     app.UseHttpsRedirection();
-
+    app.UseCors();
     app.UseAuthorization();
 //    app.UseAuthentication();
 
