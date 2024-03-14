@@ -17,17 +17,24 @@ namespace FirstDemo.Web.Controllers
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ITokenService _tokenService;
+        private readonly IConfiguration _configuration;
 
         public AccountController(ILifetimeScope scope,
-            ILogger<AccountController> logger, RoleManager<ApplicationRole> roleManager,
+            ILogger<AccountController> logger,
+            RoleManager<ApplicationRole> roleManager,
             SignInManager<ApplicationUser> signInManager,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            ITokenService tokenService,
+            IConfiguration configuration)
         {
             _scope = scope;
             _logger = logger;
             _roleManager = roleManager;
             _signInManager = signInManager;
             _userManager = userManager;
+            _tokenService = tokenService;
+            _configuration = configuration;
         }
 
         public IActionResult Register()
@@ -47,9 +54,10 @@ namespace FirstDemo.Web.Controllers
 
                 // If you need to include the port number in the URL
                 // var baseUrl = $"{Request.Scheme}://{Request.Host.Value}";
+                //var response = await model.RegisterAsync(Url.Content("~/"));
 
                 var response = await model.RegisterAsync(Url.Content(baseUrl));
-            
+
                 if (response.errors is not null)
                 {
                     foreach (var error in response.errors)
@@ -63,14 +71,14 @@ namespace FirstDemo.Web.Controllers
             }
             return View(model);
 
-           
+
         }
 
         public async Task<IActionResult> LoginAsync(string returnUrl = null)
         {
             //var baseUrl = $"{Request.Scheme}://{Request.Host}";
             //returnUrl ??= baseUrl;
-            returnUrl ??= Url.Content("~/"); 
+            returnUrl ??= Url.Content("~/");
 
             var model = _scope.Resolve<LoginModel>();
 
@@ -96,6 +104,15 @@ namespace FirstDemo.Web.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    var user = await _userManager.FindByEmailAsync(model.Email);
+                    var claims = (await _userManager.GetClaimsAsync(user)).ToArray();
+                    var token = await _tokenService.GetJwtToken(claims,
+                            _configuration["Jwt:Key"],
+                            _configuration["Jwt:Issuer"],
+                            _configuration["Jwt:Audience"]
+                        );
+                    HttpContext.Session.SetString("token", token);  
+
                     return LocalRedirect(model.ReturnUrl);
                 }
                 else

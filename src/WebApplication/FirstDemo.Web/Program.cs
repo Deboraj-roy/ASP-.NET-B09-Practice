@@ -80,6 +80,13 @@ try
         });
     });
 
+    builder.Services.AddSession(options =>
+    {
+        options.IdleTimeout = TimeSpan.FromMinutes(30);
+        options.Cookie.HttpOnly = true;
+        options.Cookie.IsEssential = true;
+    });
+
     builder.Services.AddSingleton<IAuthorizationHandler, CourseViewRequirementHandler>();
 
     //For Docker container
@@ -100,12 +107,12 @@ try
         app.UseHsts();
     }
 
-    app.UseHttpsRedirection();
-    app.UseStaticFiles();
-
-    app.UseRouting();
-
-    app.UseAuthorization();
+    app.UseHttpsRedirection()
+        .UseStaticFiles()
+        .UseRouting()
+        .UseAuthentication()
+        .UseAuthorization()
+        .UseSession();
 
 
 
