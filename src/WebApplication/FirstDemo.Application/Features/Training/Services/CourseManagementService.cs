@@ -32,7 +32,7 @@ namespace FirstDemo.Application.Features.Training.Services
                 Description = description
             };
 
-            _unitOfWork.CourseRepository.Add(course);
+            await _unitOfWork.CourseRepository.AddAsync(course);
             await _unitOfWork.SaveAsync();
         }
 
