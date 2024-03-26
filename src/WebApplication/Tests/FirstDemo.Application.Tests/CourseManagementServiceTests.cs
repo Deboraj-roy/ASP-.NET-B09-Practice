@@ -1,8 +1,10 @@
 using Autofac.Extras.Moq;
 using FirstDemo.Application.Features.Training.Services;
 using FirstDemo.Domain.Entities;
+using FirstDemo.Domain.Exceptions;
 using FirstDemo.Domain.Repositories;
 using Moq;
+using Shouldly;
 
 namespace FirstDemo.Application.Tests
 {
@@ -64,13 +66,35 @@ namespace FirstDemo.Application.Tests
             await _courseManagementService.CreateCourseAsync(title, description, fees);
 
             //Assert
-            _unitOfWorkMock.VerifyAll();
-            _courseRepositoryMock.VerifyAll();
+            this.ShouldSatisfyAllConditions(
+                () => _unitOfWorkMock.VerifyAll(),
+                () => _courseRepositoryMock.VerifyAll()
+                );
         }
         [Test]
-        public void CreateCourseAsync_TitleDuplicate_ThrowsException()
+        public async Task CreateCourseAsync_TitleDuplicate_ThrowsException()
         {
-            Assert.Pass();
+            // Arrange
+            const string title = "C# beginner";
+            const uint fees = 2000;
+            const string description = "A beginner guide to C#";
+
+            var course = new Course
+            {
+                Title = title,
+                Fees = fees,
+                Description = description
+            };
+
+            _unitOfWorkMock.Setup(x => x.CourseRepository).Returns(_courseRepositoryMock.Object).Verifiable();
+            _courseRepositoryMock.Setup(x => x.IsTitleDuplicateAsync(title, null)).ReturnsAsync(true).Verifiable();
+
+            //Act && Assert
+
+            await Should.ThrowAsync<DuplicateTitleException>(
+                 async () => await _courseManagementService.CreateCourseAsync(title, description, fees)
+               );
+            
         }
     }
 }
