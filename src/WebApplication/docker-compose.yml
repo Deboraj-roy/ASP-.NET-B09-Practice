@@ -1,0 +1,18 @@
+version: "3"
+services:
+    web:
+        build: 
+            context: .
+            dockerfile: FirstDemo.Web/DockerFile
+        image: deboraj/firstdemo.web
+        env_file: 
+            - FirstDemo.Web/web.env
+        volumes:
+            - firstdemoweb-data:/app/Logs
+        ports:
+            - "6969:80"
+        entrypoint: ["dotnet", "FirstDemo.Web.dll"]
+volumes:
+    firstdemoweb-data:
+      external: true
+     

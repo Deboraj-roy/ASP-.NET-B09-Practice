@@ -30,18 +30,73 @@ docker build -t firstdemo -f FirstDemo.Web/Dockerfile .
  docker run -it -p 8000:80 ubuntudemo
 
  docker run -p 6969:80 -d firstdemo
-----------------------------------------------------------------------------------
+ docker run -it -p 6969:80 -d firstdemo
 
-
-
-----------------------------------------------------------------------------------
-
+ docker rm 6df3dd0be0a9 -f
 
 ----------------------------------------------------------------------------------
+create voluem
 
+docker volume create --driver local --opt type=none --opt device=D:\Github\ASP-.NET-B09-Practice\volume --opt o=bind firstdemoweb-data
+
+docker run -d -p 6969:80 -v firstdemoweb-data:/app/Logs firstdemo
 
 ----------------------------------------------------------------------------------
 
+PS C:\Users\UseR> cd D:\Github\ASP-.NET-B09-Practice\src\WebApplication
+PS D:\Github\ASP-.NET-B09-Practice\src\WebApplication> docker build -t firstdemo -f FirstDemo.Web/DockerFile
+ERROR: "docker buildx build" requires exactly 1 argument.
+See 'docker buildx build --help'.
+
+Usage:  docker buildx build [OPTIONS] PATH | URL | -
+
+Start a build
+PS D:\Github\ASP-.NET-B09-Practice\src\WebApplication> docker build -t firstdemo -f FirstDemo.Web/DockerFile .
+[+] Building 61.5s (11/18)
+----------------------------------------------------------------------------------
+
+docker compose up
+make sure your file path is okay
+volumes:
+    firstdemoweb-data:
+
+
+
+version: "3"
+services:
+    web:
+        build: 
+            context: .
+            dockerfile: FirstDemo.Web/DockerFile
+        image: deboraj/firstdemo.web
+        env_file: 
+            - FirstDemo.Web/web.env
+        volumes:
+            - firstdemoweb-data:/app/Logs
+        ports:
+            - "6969:80"
+        entrypoint: ["dotnet", "FirstDemo.Web.dll"]
+volumes:
+    firstdemoweb-data:
+      external: true
+
+----------------------------------------
+read log file
+
+docker exec containerID ls /app/Logs/
+docker exec containerID cat /app/Logs/
+
+
+----------------------------------------------------------------------------------
+create a repository on
+https://hub.docker.com/repository/docker/deboraj/aspnetb9practice/general
+
+docker push deboraj/aspnetb9practice:tagname
+
+
+docker tag firstdemo:latest deboraj/aspnetb9practice:v1
+
+docker push deboraj/aspnetb9practice:v1
 
 ----------------------------------------------------------------------------------
 

@@ -1,0 +1,18 @@
+2024-04-08 19:37:02.472 +00:00 [WRN] Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+2024-04-08 19:37:04.010 +00:00 [WRN] Failed to determine the https port for redirect.
+2024-04-08 19:37:04.037 +00:00 [WRN] Error unprotecting the session cookie.
+System.Security.Cryptography.CryptographicException: The key {411a8c0d-4912-41f2-8383-a2bf3c8c41a0} was not found in the key ring. For more information go to http://aka.ms/dataprotectionwarning
+   at Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingBasedDataProtector.UnprotectCore(Byte[] protectedData, Boolean allowOperationsOnRevokedKeys, UnprotectStatus& status)
+   at Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingBasedDataProtector.Unprotect(Byte[] protectedData)
+   at Microsoft.AspNetCore.Session.CookieProtection.Unprotect(IDataProtector protector, String protectedText, ILogger logger)
+2024-04-08 19:37:10.000 +00:00 [WRN] Error unprotecting the session cookie.
+System.Security.Cryptography.CryptographicException: The key {411a8c0d-4912-41f2-8383-a2bf3c8c41a0} was not found in the key ring. For more information go to http://aka.ms/dataprotectionwarning
+   at Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingBasedDataProtector.UnprotectCore(Byte[] protectedData, Boolean allowOperationsOnRevokedKeys, UnprotectStatus& status)
+   at Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingBasedDataProtector.Unprotect(Byte[] protectedData)
+   at Microsoft.AspNetCore.Session.CookieProtection.Unprotect(IDataProtector protector, String protectedText, ILogger logger)
+2024-04-08 19:37:10.953 +00:00 [WRN] Error unprotecting the session cookie.
+System.Security.Cryptography.CryptographicException: The key {411a8c0d-4912-41f2-8383-a2bf3c8c41a0} was not found in the key ring. For more information go to http://aka.ms/dataprotectionwarning
+   at Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingBasedDataProtector.UnprotectCore(Byte[] protectedData, Boolean allowOperationsOnRevokedKeys, UnprotectStatus& status)
+   at Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingBasedDataProtector.Unprotect(Byte[] protectedData)
+   at Microsoft.AspNetCore.Session.CookieProtection.Unprotect(IDataProtector protector, String protectedText, ILogger logger)
+2024-04-08 19:37:10.958 +00:00 [INF] I am in index

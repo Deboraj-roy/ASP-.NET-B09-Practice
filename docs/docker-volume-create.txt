@@ -1,0 +1,1 @@
+docker volume create --driver local --opt type=none --opt device=D:\Github\ASP-.NET-B09-Practice\volume --opt o=bind firstdemoweb-data
