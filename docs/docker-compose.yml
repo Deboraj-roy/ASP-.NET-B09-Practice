@@ -1,0 +1,59 @@
+version: "3"
+services:
+    web:
+        build: 
+            context: FirstDemo/
+            dockerfile: FirstDemo.Web/Dockerfile
+        image: devskill/firstdemo.web
+        env_file: 
+            - FirstDemo/Env/web.env
+        volumes:
+            - ./Logs/Web:/app/Logs/
+        ports:
+            - "8000:80"
+        depends_on:
+            - db
+        entrypoint: ["dotnet", "FirstDemo.Web.dll"]
+    worker:
+        build: 
+            context: FirstDemo/
+            dockerfile: FirstDemo.Worker/Dockerfile
+        image: devskill/firstdemo.worker
+        env_file: 
+            - FirstDemo/Env/worker.env
+        depends_on: 
+            - db 
+            - web
+        volumes:
+            - ./Logs/Worker:/app/Logs/
+        entrypoint:  ["dotnet", "FirstDemo.Worker.dll"]
+    api:
+        build:
+            context: FirstDemo/
+            dockerfile: FirstDemo.Api/Dockerfile 
+        image: devskill/firstdemo.api
+        env_file: 
+            - FirstDemo/Env/api.env
+        ports:
+            - "9000:80"
+        depends_on: 
+            - db
+            - web
+        volumes: 
+            - ./Logs/Api:/app/Logs/
+        entrypoint:  ["dotnet", "FirstDemo.API.dll"]
+    
+    db:
+        build: 
+            context: FirstDemo/Db
+            dockerfile: Dockerfile
+        image: "devskill/firstdemo.sqlserver"
+        env_file: 
+            - FirstDemo/Env/db.env
+        expose:
+            - "1432"
+        ports: 
+            - "1432:1433"
+volumes:
+    app-volume:
+     
