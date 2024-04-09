@@ -15,18 +15,32 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 using FirstDemo.Infrastructure.Membership;
 using Microsoft.AspNetCore.Authorization;
 using FirstDemo.Infrastructure.Requirements;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Host.UseSerilog((ctx, lc) => lc
-    .MinimumLevel.Debug()
-    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-    .Enrich.FromLogContext()
-    .ReadFrom.Configuration(builder.Configuration));
+
+Log.Logger = new LoggerConfiguration()
+                .WriteTo.File("Logs/web-log-.log", rollOnFileSizeLimit: true, rollingInterval: RollingInterval.Day)
+                .CreateBootstrapLogger();
 
 try
 {
+    Log.Information("Application Starting...");
+
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
     var migrationAssembly = Assembly.GetExecutingAssembly().FullName;
+
+    Log.Information("\n");
+    Log.Information("Connection String: " + connectionString);
+    Log.Information("Migration Assembly: " + migrationAssembly);
+    Log.Information("\n");
+
+
+    builder.Host.UseSerilog((ctx, lc) => lc
+        .MinimumLevel.Debug()
+        .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+        .Enrich.FromLogContext()
+        .ReadFrom.Configuration(builder.Configuration));
 
     builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
     builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
@@ -128,7 +142,6 @@ try
 
     app.Run();
 
-    Log.Information("Application Starting...");
 }
 catch (Exception ex)
 {
