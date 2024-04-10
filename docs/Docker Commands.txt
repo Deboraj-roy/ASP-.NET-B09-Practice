@@ -25,6 +25,7 @@ docker rmi ubuntudemo -f
 ----------------------------------------------------------------------------------
 
 docker build -t firstdemo -f FirstDemo.Web/Dockerfile .
+docker build -t firstdemo2 -f FirstDemo.Web/Dockerfile .
 
 ----------------------------------------------------------------------------------
  docker run -it -p 8000:80 ubuntudemo
@@ -107,10 +108,28 @@ docker-compose down
 
 ----------------------------------------------------------------------------------
 
+stackOverflow project dockerize
 
+
+create volume
+
+docker volume create --driver local --opt type=none --opt device=D:\Github\DEBORAJ-ROY-B9\src\Volume --opt o=bind stackoverflow-data
+
+
+docker-compose -f "docker stackOverflow.yml" up
+
+or 
+rename your file to dockr-compose.yml
+
+then 
+docker-compose up -d
+docker-compose down
 ----------------------------------------------------------------------------------
 
+In your case, it looks like you have a file named docker stackOverflow.yml instead of the usual docker-compose.yml. To resolve this issue, you need to specify the exact file name in the docker-compose up command. Here's how you can run Docker Compose with your specific configuration file:
 
+docker-compose -f "docker stackOverflow.yml" up
+docker-compose -f "docker stackOverflow.yml" down
 ----------------------------------------------------------------------------------
 
 
