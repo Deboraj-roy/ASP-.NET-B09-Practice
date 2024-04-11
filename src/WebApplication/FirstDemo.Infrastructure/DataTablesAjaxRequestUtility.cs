@@ -1,47 +1,21 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Primitives;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using FirstDemo.Infrastructure.Extensions;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Primitives;
 
 namespace FirstDemo.Infrastructure
 {
-    public class DataTablesAjaxRequestUtility
+    public abstract class DataTables
     {
-        private HttpRequest _request;
-
-        public int Start
-        {
-            get
-            {
-                return int.Parse(RequestData.Where(x => x.Key == "start")
-                    .FirstOrDefault().Value);
-            }
-        }
-        public int Length
-        {
-            get
-            {
-                return int.Parse(RequestData.Where(x => x.Key == "length")
-                    .FirstOrDefault().Value);
-            }
-        }
-
-        public string SearchText
-        {
-            get
-            {
-                return RequestData.Where(x => x.Key == "search[value]")
-                    .FirstOrDefault().Value;
-            }
-        }
-
-        public DataTablesAjaxRequestUtility(HttpRequest request)
-        {
-            _request = request;
-        }
+        public int Start { get; set; }
+        public int Length { get; set; }
+        public SortColumn[] Order { get; set; }
+        public DataTablesSearch Search { get; set; }
 
         public int PageIndex
         {
@@ -65,21 +39,7 @@ namespace FirstDemo.Infrastructure
             }
         }
 
-        private IEnumerable<KeyValuePair<string, StringValues>> RequestData
-        {
-            get
-            {
-                var method = _request.Method.ToLower();
-                if (method == "get")
-                    return _request.Query;
-                else if (method == "post")
-                    return _request.Form;
-                else
-                    throw new InvalidOperationException("Http method not supported, use get or post");
-            }
-        }
-
-        public static object EmptyResult
+        public object EmptyResult
         {
             get
             {
@@ -92,26 +52,33 @@ namespace FirstDemo.Infrastructure
             }
         }
 
-        public string GetSortText(string[] columnNames)
+        public string FormatSortExpression(params string[] columns)
         {
-            var sortText = new StringBuilder();
-            for (var i = 0; i < columnNames.Length; i++)
+            StringBuilder columnBuilder = new StringBuilder();
+
+            for (int i = 0; i < Order.Length; i++)
             {
-                if (RequestData.Any(x => x.Key == $"order[{i}][column]"))
-                {
-                    if (sortText.Length > 0)
-                        sortText.Append(",");
+                columnBuilder.Append(columns[Order[i].Column])
+                .Append(" ")
+                .Append(Order[i].Dir);
 
-                    var columnValue = RequestData.Where(x => x.Key == $"order[{i}][column]").FirstOrDefault();
-                    var directionValue = RequestData.Where(x => x.Key == $"order[{i}][dir]").FirstOrDefault();
-
-                    var column = int.Parse(columnValue.Value.ToArray()[0]);
-                    var direction = directionValue.Value.ToArray()[0];
-                    var sortDirection = $"{columnNames[column]} {(direction == "asc" ? "asc" : "desc")}";
-                    sortText.Append(sortDirection);
-                }
+                if (i < Order.Length - 1)
+                    columnBuilder.Append(", ");
             }
-            return sortText.ToString();
+
+            return columnBuilder.ToString();
         }
+    }
+
+    public struct SortColumn
+    {
+        public int Column { get; set; }
+        public string Dir { get; set; }
+    }
+
+    public struct DataTablesSearch
+    {
+        public bool Regex { get; set; }
+        public string Value { get; set; }
     }
 }

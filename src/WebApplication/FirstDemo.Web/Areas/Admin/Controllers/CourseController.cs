@@ -81,7 +81,7 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
         //[AllowAnonymous]
         public async Task<JsonResult> GetCourses(CourseListModel model)
         {
-            var dataTablesModel = new DataTablesAjaxRequestUtility(Request);
+            var dataTablesModel = new DataTablesAjaxRequestUtilityCopy(Request);
             model.Resolve(_scope);
 
             var data = await model.GetPagedCoursesAsync(dataTablesModel);

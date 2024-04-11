@@ -29,9 +29,8 @@ namespace FirstDemo.API.Controllers
         {
             handler.ResolveDependency(_scope);
             _logger.LogInformation($"Origin:" + Request.Headers.Origin.Count);
-            var dataTablesModel = new DataTablesAjaxRequestUtility(Request);
 
-            var data = await handler.GetPagedCourses(dataTablesModel);
+            var data = await handler.GetPagedCourses();
             return data;
         }  
          

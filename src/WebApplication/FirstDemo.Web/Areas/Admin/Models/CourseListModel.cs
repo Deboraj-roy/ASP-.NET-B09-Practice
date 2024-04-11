@@ -29,7 +29,7 @@ namespace FirstDemo.Web.Areas.Admin.Models
             _courseManagementService = _scope.Resolve<ICourseManagementService>();
 		}
 
-		public async Task<object> GetPagedCoursesAsync(DataTablesAjaxRequestUtility dataTablesUtility)
+		public async Task<object> GetPagedCoursesAsync(DataTablesAjaxRequestUtilityCopy dataTablesUtility)
         {
             var data = await _courseManagementService.GetPagedCoursesAsync(
                 dataTablesUtility.PageIndex,

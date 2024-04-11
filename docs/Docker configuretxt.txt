@@ -1,0 +1,11 @@
+ 
+00:41:07	Md. Redwan Hossain:	create a .wslconfig file in the user home directory. Then paste the following codes in that file:
+
+[wsl2]
+memory=1GB
+processors=2
+
+in cmd
+
+wsl --shutdown
+Restart-Service LxssManager

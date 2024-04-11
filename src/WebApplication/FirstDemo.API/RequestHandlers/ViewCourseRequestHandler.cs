@@ -4,9 +4,9 @@ using FirstDemo.Application.Features.Training.Services;
 using FirstDemo.Domain.Entities;
 using FirstDemo.Infrastructure;
 
-namespace FirstDemo.API.RequestHandlers
+namespace FirstDemo.API.RequestHandlers 
 {
-    public class ViewCourseRequestHandler
+    public class ViewCourseRequestHandler : DataTables
     {
         private ICourseManagementService? _courseService;
         private IMapper _mapper;
@@ -50,16 +50,16 @@ namespace FirstDemo.API.RequestHandlers
             return await _courseService?.GetCourseAsync(id);
         }
 
-        internal async Task<object?> GetPagedCourses(DataTablesAjaxRequestUtility model)
+        internal async Task<object?> GetPagedCourses()
         {
 
             var data = await _courseService?.GetPagedCoursesAsync(
-                model.PageIndex,
-                model.PageSize,
+                PageIndex,
+                PageSize,
                 SearchItem.Title,
                 SearchItem.CourseFeesFrom,
                 SearchItem.CourseFeesTo,
-                model.GetSortText(new string[] { "Title", "Description", "Fees" }));
+                FormatSortExpression("Title", "Description", "Fees"));
 
             return new
             {
