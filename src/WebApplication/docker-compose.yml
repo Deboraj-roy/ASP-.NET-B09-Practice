@@ -12,6 +12,8 @@ services:
         ports:
             - "6969:80"
         entrypoint: ["dotnet", "FirstDemo.Web.dll"]
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
 volumes:
     firstdemoweb-data:
       external: true
