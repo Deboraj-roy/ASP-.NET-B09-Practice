@@ -35,8 +35,8 @@ namespace FirstDemo.Web.Areas.Admin.Models
                 dataTablesUtility.PageIndex,
                 dataTablesUtility.PageSize,
                 SearchItem.Title,
-                SearchItem.CourseFeeFrom, 
-                SearchItem.CourseFeeTo,
+                SearchItem.CourseFeeFrom.Value, 
+                SearchItem.CourseFeeTo.Value,
                 dataTablesUtility.GetSortText(new string[] { "Title", "Description", "Fees" }));
 
             return new

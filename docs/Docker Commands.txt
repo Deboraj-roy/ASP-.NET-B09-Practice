@@ -149,12 +149,33 @@ see connection strings
 
 
 ----------------------------------------------------------------------------------
+docker push to hub.docker.com
+
+To push a Docker image to a registry like Docker Hub, you need to follow these general steps:
+
+Tag your Docker image: Before you can push your image, you need to tag it appropriately. This includes giving it the name of your registry/repository and optionally a tag.
 
 
+docker tag <image_name>:<tag> <registry_username>/<repository_name>:<tag>
+
+
+For example, if your image is named deboraj/firstdemo.web and you want to push it to the repository deboraj/aspnetb9practice with the tag v2, you would run:
+
+docker tag deboraj/firstdemo.web deboraj/aspnetb9practice:v2
+
+docker login
+
+docker push <registry_username>/<repository_name>:<tag>
+
+docker push deboraj/aspnetb9practice:v2
 
 ----------------------------------------------------------------------------------
 
+B9 Final Project in docker 
 
+docker tag deboraj/stackoverflow.web:latest deboraj/b9finalproject:v1
+
+docker push deboraj/b9finalproject:v1
 
 ----------------------------------------------------------------------------------
 

@@ -118,14 +118,17 @@
                 ajax: {
                     url: "https://localhost:7157/v3/Course",
                     type: "POST",
-                    Headers: {
-                        Authorization: 'Bearer @HttpContextAccessor.HttpContext.Session.GetString("token")'
+                    contentType: "application/json", //must be added
+                    dataType: "json", //better to add, not mandatory
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization",
+                            "Bearer " + '@HttpContextAccessor.HttpContext.Session.GetString("token")');
                     },
                     data: function (d) {
                         d.SearchItem = {
                             Title: $("#SearchItem_Title").val(),
-                            CourseFeesFrom: $("#SearchItem_CourseFeesFrom").val() === "" ? null : $("#SearchItem_CourseFeesFrom").val(),
-                            CourseFeesTo: $("#SearchItem_CourseFeesTo").val() === "" ? null : $("#SearchItem_CourseFeesTo").val()
+                            CourseFeesFrom: $("#SearchItem_CourseFeesFrom").val() === "" ? 0 : $("#SearchItem_CourseFeesFrom").val(),
+                            CourseFeesTo: $("#SearchItem_CourseFeesTo").val() === "" ? 0 : $("#SearchItem_CourseFeesTo").val()
                         };
                         //console.log(d.SearchItem);
                     },

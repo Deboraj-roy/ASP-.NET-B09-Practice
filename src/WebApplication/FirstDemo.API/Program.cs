@@ -12,17 +12,26 @@ using Serilog.Events;
 using FirstDemo.API;
 using FirstDemo.Infrastructure.Extensions;
 
-var builder = WebApplication.CreateBuilder(args);
+var configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json")
+                    .Build();
+ 
 
-
-builder.Host.UseSerilog((ctx, lc) => lc
-    .MinimumLevel.Debug()
-    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-    .Enrich.FromLogContext()
-    .ReadFrom.Configuration(builder.Configuration));
+Log.Logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(configuration)
+            .CreateBootstrapLogger();
 
 try
 {
+    var builder = WebApplication.CreateBuilder(args);
+
+    builder.Host.UseSerilog((ctx, lc) => lc
+        .MinimumLevel.Debug()
+        .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+        .Enrich.FromLogContext()
+        .ReadFrom.Configuration(builder.Configuration));
+
     // Add services to the container.
 
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -60,8 +69,8 @@ try
             builder =>
             {
                 //use your web apps port and localhost
-                //builder.WithOrigins("https://localhost:7159")
-                builder.WithOrigins("https://localhost")
+                //builder.WithOrigins("https://localhost:7129")
+                builder.WithOrigins("https://localhost:7129","http://localhost")
                    .AllowAnyMethod()
                    .AllowAnyHeader();
             });

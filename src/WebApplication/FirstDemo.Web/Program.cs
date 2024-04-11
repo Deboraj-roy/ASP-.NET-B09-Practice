@@ -17,15 +17,20 @@ using Microsoft.AspNetCore.Authorization;
 using FirstDemo.Infrastructure.Requirements;
 using System.Configuration;
 
-var builder = WebApplication.CreateBuilder(args);
+var configuration = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json")
+    .Build();
 
 Log.Logger = new LoggerConfiguration()
-                .WriteTo.File("Logs/web-log-.log", rollOnFileSizeLimit: true, rollingInterval: RollingInterval.Day)
+                .ReadFrom.Configuration(configuration)
                 .CreateBootstrapLogger();
 
 try
 {
     Log.Information("Application Starting...");
+
+    var builder = WebApplication.CreateBuilder(args);
 
     var connectionString = builder.Configuration.GetConnectionString("WebAppDefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
     var migrationAssembly = Assembly.GetExecutingAssembly().FullName;

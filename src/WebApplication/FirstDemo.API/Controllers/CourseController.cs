@@ -25,17 +25,16 @@ namespace FirstDemo.API.Controllers
 
 
         [HttpPost, Authorize(Policy = "CourseViewRequirementPolicy")]
-        public object Post([FromBody] ViewCourseRequestHandler handler)
+        public async Task<object> Post([FromBody] ViewCourseRequestHandler handler)
         {
+            handler.ResolveDependency(_scope);
             _logger.LogInformation($"Origin:" + Request.Headers.Origin.Count);
-             
             var dataTablesModel = new DataTablesAjaxRequestUtility(Request);
 
-            var data = handler.GetPagedCourses(dataTablesModel);
+            var data = await handler.GetPagedCourses(dataTablesModel);
             return data;
-        }
-
-
+        }  
+         
          /*
         [HttpGet, Authorize(Policy = "CourseViewRequirementPolicy")]
         public async Task<IEnumerable<Course>> Get()
@@ -67,41 +66,41 @@ namespace FirstDemo.API.Controllers
         //    var model = _scope.Resolve<CourseModel>();
         //    return model.GetCourse(name);
         //}
-        /*
-                [HttpPost()]
-                public IActionResult Post([FromBody] ViewCourseRequestHandler model)
-                {
-                    try
-                    {
-                        model.ResolveDependency(_scope);
-                        model.CreateCourse();
 
-                        return Ok();
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.LogError(ex, "Couldn't delete course");
-                        return BadRequest();
-                    }
-                }
+        //[HttpPost()]
+        //public IActionResult Post([FromBody] ViewCourseRequestHandler model)
+        //{
+        //    try
+        //    {
+        //        model.ResolveDependency(_scope);
+        //        model.CreateCourse();
 
-                [HttpPut]
-                public IActionResult Put(ViewCourseRequestHandler model)
-                {
-                    try
-                    {
-                        model.ResolveDependency(_scope);
-                        model.UpdateCourse();
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Couldn't delete course");
+        //        return BadRequest();
+        //    }
+        //}
 
-                        return Ok();
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.LogError(ex, "Couldn't delete course");
-                        return BadRequest();
-                    }
-                }
-        */
+        //[HttpPut]
+        //public IActionResult Put(ViewCourseRequestHandler model)
+        //{
+        //    try
+        //    {
+        //        model.ResolveDependency(_scope);
+        //        model.UpdateCourse();
+
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Couldn't delete course");
+        //        return BadRequest();
+        //    }
+        //}
+
         //[HttpDelete("{id}")]
         //public IActionResult Delete(Guid id)
         //{
