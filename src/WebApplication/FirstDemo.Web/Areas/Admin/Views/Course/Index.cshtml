@@ -106,7 +106,7 @@
     <script src="~/admin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="~/admin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="~/admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-  
+
     <script>
         $(function () {
             $("#courses").DataTable({
@@ -130,6 +130,7 @@
                             CourseFeesFrom: $("#SearchItem_CourseFeesFrom").val() === "" ? 0 : $("#SearchItem_CourseFeesFrom").val(),
                             CourseFeesTo: $("#SearchItem_CourseFeesTo").val() === "" ? 0 : $("#SearchItem_CourseFeesTo").val()
                         };
+                        return JSON.stringify(d);
                         //console.log(d.SearchItem);
                     },
                 },
@@ -152,7 +153,7 @@
                     }
                 ],
                 buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#courses_wrapper'); 
+            }).buttons().container().appendTo('#courses_wrapper');
 
             $('#courses').on('click', '.show-bs-modal', function (event) {
                 let id = $(this).data("id");

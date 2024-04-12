@@ -78,7 +78,7 @@ namespace FirstDemo.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        //[AllowAnonymous]
+        //[AllowAnonymous] 
         public async Task<JsonResult> GetCourses(CourseListModel model)
         {
             var dataTablesModel = new DataTablesAjaxRequestUtilityCopy(Request);
