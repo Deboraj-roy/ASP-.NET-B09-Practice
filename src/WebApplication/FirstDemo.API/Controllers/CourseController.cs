@@ -32,9 +32,9 @@ namespace FirstDemo.API.Controllers
 
             var data = await handler.GetPagedCourses();
             return data;
-        }  
-         
-         /*
+        }
+
+
         [HttpGet, Authorize(Policy = "CourseViewRequirementPolicy")]
         public async Task<IEnumerable<Course>> Get()
         {
@@ -49,7 +49,7 @@ namespace FirstDemo.API.Controllers
                 return null;
             }
         }
-*/
+
 
         [HttpGet("{id}")]
         //[Authorize(Policy = "CourseViewRequirementPolicy")]
