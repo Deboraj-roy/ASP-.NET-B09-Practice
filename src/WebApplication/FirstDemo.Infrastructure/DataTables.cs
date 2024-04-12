@@ -39,7 +39,7 @@ namespace FirstDemo.Infrastructure
             }
         }
 
-        public object EmptyResult
+        public static object EmptyResult
         {
             get
             {
