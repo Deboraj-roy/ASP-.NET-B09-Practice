@@ -1,0 +1,29 @@
+To ignore multiple `.env` files in the specified path (`D:\Github\ex\DEBORAJ-ROY-B9\src\Stackoverflow-clone\Stackoverflow.Web\`), you can update your `.gitignore` file as follows:
+
+```
+# Ignore Visual Studio files and folders
+**/.vs
+**/bin
+**/obj
+**/*.user
+
+# Ignore logs folder
+**/Logs/
+
+# Ignore .env files
+/src/Stackoverflow-clone/Stackoverflow.Web/*.env
+```
+
+Make sure to save the changes to the `.gitignore` file.
+
+Then, run the following command in your terminal or command prompt to clear the Git cache:
+```
+git rm -r --cached .
+```
+
+Finally, commit the changes to your repository:
+```
+git commit -m "Ignore .env files"
+```
+
+By doing this, all the `.env` files in the specified path will be ignored by Git and will not be tracked or included in future commits.
