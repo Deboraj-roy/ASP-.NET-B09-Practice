@@ -26,6 +26,7 @@ docker rmi ubuntudemo -f
 
 docker build -t firstdemo -f FirstDemo.Web/Dockerfile .
 docker build -t firstdemo2 -f FirstDemo.Web/Dockerfile .
+docker build -t firstdemo2 -f Stackoverflow.API/Dockerfile .
 
 ----------------------------------------------------------------------------------
  docker run -it -p 8000:80 ubuntudemo
