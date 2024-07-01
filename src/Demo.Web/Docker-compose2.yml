@@ -1,0 +1,29 @@
+version: "3"
+services:
+    api:
+        build: 
+            context: .
+            dockerfile: Demo.API/DockerFile
+        image: deboraj/demo.api:v1.0  
+        ports:
+            - "6969:80"  
+        entrypoint: ["dotnet", "Demo.API.dll"] 
+        
+    web:
+        build: 
+            context: .
+            dockerfile: Demo.Web/DockerFile
+        image: deboraj/demo.web:v1.0 #lowercase
+          
+        ports:
+            - "8080:80"
+        environment:
+             - API_URL=http://192.168.0.101:6969/v3/
+             - API_URL2=http://192.168.0.101:6969/v3/
+             - API_URL3=http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:3000
+             - API_URL4=http://${HOST_IP}:6969/v3/
+             - API_URL5=http://+:80;https://+:443
+             - API_URL6=http://+:80
+        entrypoint: ["dotnet", "Demo.Web.dll"]
+         
+      
