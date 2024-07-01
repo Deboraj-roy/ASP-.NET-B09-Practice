@@ -20,6 +20,8 @@ namespace Demo.Web.Controllers
 
         public IActionResult Privacy()
         {
+            //Get The Server IP
+            ViewBag.IP = HttpContext.Connection.RemoteIpAddress?.ToString();
             return View();
         }
 
