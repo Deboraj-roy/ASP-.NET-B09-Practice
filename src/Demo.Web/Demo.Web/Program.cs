@@ -1,8 +1,10 @@
 using Demo.Web.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
+using System.Collections;
 
 var configuration = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
@@ -38,7 +40,16 @@ try
         .AddEntityFrameworkStores<ApplicationDbContext>();
     builder.Services.AddControllersWithViews();
 
+    builder.Services.Configure<KestrelServerOptions>(builder.Configuration.GetSection("Kestrel"));
+
     var app = builder.Build();
+
+    //Environment Variables
+    Log.Information("\nEnvironment Variables:\n");
+    foreach (DictionaryEntry de in Environment.GetEnvironmentVariables())
+    {
+        Log.Information($"{de.Key}: {de.Value}"); // or de.Key + ": " + de.Value);
+    }
 
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
