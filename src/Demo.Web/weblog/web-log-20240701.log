@@ -1,0 +1,56 @@
+2024-07-01 08:47:37.268 +00:00 [INF] Application Starting...
+2024-07-01 08:47:37.311 +00:00 [INF] Connection String:Server=(localdb)\mssqllocaldb;Database=aspnet-Demo.Web-9c261eaf-1820-46b2-9e7c-f4c523a91a42;Trusted_Connection=True;MultipleActiveResultSets=true
+2024-07-01 08:47:37.406 +00:00 [INF] 
+Environment Variables:
+
+2024-07-01 08:47:37.411 +00:00 [INF] DOTNET_SDK_VERSION: 7.0.410
+2024-07-01 08:47:37.411 +00:00 [INF] DOTNET_GENERATE_ASPNET_CERTIFICATE: false
+2024-07-01 08:47:37.411 +00:00 [INF] API_URL4: http://:6969/v3/
+2024-07-01 08:47:37.411 +00:00 [INF] NUGET_XMLDOC_MODE: skip
+2024-07-01 08:47:37.411 +00:00 [INF] ASPNET_VERSION: 7.0.20
+2024-07-01 08:47:37.412 +00:00 [INF] API_URL6: http://+:80
+2024-07-01 08:47:37.412 +00:00 [INF] API_URL5: http://+:80;https://+:443
+2024-07-01 08:47:37.412 +00:00 [INF] API_URL3: http://host.docker.internal:3000
+2024-07-01 08:47:37.412 +00:00 [INF] API_URL2: http://192.168.0.101:6969/v3/
+2024-07-01 08:47:37.412 +00:00 [INF] API_URL: http://192.168.0.101:6969/v3/
+2024-07-01 08:47:37.412 +00:00 [INF] PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+2024-07-01 08:47:37.412 +00:00 [INF] POWERSHELL_DISTRIBUTION_CHANNEL: PSDocker-DotnetSDK-Debian-11
+2024-07-01 08:47:37.412 +00:00 [INF] DOTNET_USE_POLLING_FILE_WATCHER: true
+2024-07-01 08:47:37.412 +00:00 [INF] HOME: /root
+2024-07-01 08:47:37.413 +00:00 [INF] DOTNET_VERSION: 7.0.20
+2024-07-01 08:47:37.413 +00:00 [INF] ASPNETCORE_URLS: 
+2024-07-01 08:47:37.413 +00:00 [INF] DOTNET_NOLOGO: true
+2024-07-01 08:47:37.413 +00:00 [INF] DOTNET_RUNNING_IN_CONTAINER: true
+2024-07-01 08:47:37.413 +00:00 [INF] HOSTNAME: 4fe406035c27
+2024-07-01 08:47:37.454 +00:00 [WRN] Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+2024-07-01 08:47:37.518 +00:00 [INF] Application Running...
+2024-07-01 08:47:37.542 +00:00 [WRN] No XML encryptor configured. Key {fd02b0bb-e9aa-4d94-84a9-948a469de1eb} may be persisted to storage in unencrypted form.
+2024-07-01 08:47:50.611 +00:00 [WRN] Failed to determine the https port for redirect.
+2024-07-01 08:54:28.024 +00:00 [INF] Application Starting...
+2024-07-01 08:54:28.074 +00:00 [INF] Connection String:Server=(localdb)\mssqllocaldb;Database=aspnet-Demo.Web-9c261eaf-1820-46b2-9e7c-f4c523a91a42;Trusted_Connection=True;MultipleActiveResultSets=true
+2024-07-01 08:54:28.177 +00:00 [INF] 
+Environment Variables:
+
+2024-07-01 08:54:28.182 +00:00 [INF] DOTNET_USE_POLLING_FILE_WATCHER: true
+2024-07-01 08:54:28.183 +00:00 [INF] POWERSHELL_DISTRIBUTION_CHANNEL: PSDocker-DotnetSDK-Debian-11
+2024-07-01 08:54:28.183 +00:00 [INF] PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+2024-07-01 08:54:28.183 +00:00 [INF] API_URL6: http://+:80
+2024-07-01 08:54:28.183 +00:00 [INF] HOSTNAME: eb0d47e01955
+2024-07-01 08:54:28.183 +00:00 [INF] DOTNET_RUNNING_IN_CONTAINER: true
+2024-07-01 08:54:28.183 +00:00 [INF] DOTNET_NOLOGO: true
+2024-07-01 08:54:28.183 +00:00 [INF] DOTNET_VERSION: 7.0.20
+2024-07-01 08:54:28.183 +00:00 [INF] HOME: /root
+2024-07-01 08:54:28.183 +00:00 [INF] API_URL2: http://192.168.0.101:6969/v3/
+2024-07-01 08:54:28.183 +00:00 [INF] DOTNET_GENERATE_ASPNET_CERTIFICATE: false
+2024-07-01 08:54:28.184 +00:00 [INF] DOTNET_SDK_VERSION: 7.0.410
+2024-07-01 08:54:28.184 +00:00 [INF] NUGET_XMLDOC_MODE: skip
+2024-07-01 08:54:28.184 +00:00 [INF] API_URL3: http://host.docker.internal:3000
+2024-07-01 08:54:28.184 +00:00 [INF] ASPNET_VERSION: 7.0.20
+2024-07-01 08:54:28.184 +00:00 [INF] API_URL4: http://:6969/v3/
+2024-07-01 08:54:28.184 +00:00 [INF] API_URL5: http://+:80;https://+:443
+2024-07-01 08:54:28.184 +00:00 [INF] ASPNETCORE_URLS: 
+2024-07-01 08:54:28.184 +00:00 [INF] API_URL: http://192.168.0.101:6969/v3/
+2024-07-01 08:54:28.230 +00:00 [WRN] Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+2024-07-01 08:54:28.287 +00:00 [INF] Application Running...
+2024-07-01 08:54:28.310 +00:00 [WRN] No XML encryptor configured. Key {f906bd2e-eac1-4988-923a-191588f24d02} may be persisted to storage in unencrypted form.
+2024-07-01 08:54:57.203 +00:00 [WRN] Failed to determine the https port for redirect.
