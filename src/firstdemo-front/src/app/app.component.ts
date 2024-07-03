@@ -11,4 +11,7 @@ import { ButtonComponent } from './components/button/button.component';
 })
 export class AppComponent {
   title = 'firstdemo-front';
+  clickbutton1() {
+    console.log("Hello, Button Clicked");
+  }
 }
