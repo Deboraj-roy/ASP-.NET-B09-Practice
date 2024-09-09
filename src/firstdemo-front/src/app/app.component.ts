@@ -24,7 +24,12 @@ export class AppComponent {
   constructor(private courseService: CourseService){ }
 
   update(){
-    this.courseService.getCourses().subscribe((data) => (this.courses = data)
+    this.courseService.getToken().subscribe((token) =>
+      (
+        this.courseService.getCourses(token).subscribe((data) =>
+          (this.courses = data)
+        )
+      )
     );
   
   }

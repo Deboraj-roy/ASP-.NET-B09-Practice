@@ -59,8 +59,8 @@ namespace FirstDemo.Web.Models
             var result = await _userManager.CreateAsync(user, Password);
             if (result.Succeeded)
             {
-                //await _userManager.AddToRoleAsync(user, UserRoles.Admin);
-                //await _userManager.AddToRoleAsync(user, UserRoles.Supervisor);
+                await _userManager.AddToRoleAsync(user, UserRoles.Admin);
+                await _userManager.AddToRoleAsync(user, UserRoles.Supervisor);
 
                 /*
                                 if (!await _userManager.IsInRoleAsync(user, UserRoles.Supervisor))

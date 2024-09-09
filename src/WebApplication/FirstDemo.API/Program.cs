@@ -70,7 +70,7 @@ try
             {
                 //use your web apps port and localhost
                 //builder.WithOrigins("https://localhost:7129")
-                builder.WithOrigins("https://localhost:7129","http://localhost", "http://localhost:4200", "http://localhost:5102")
+                builder.WithOrigins("https://localhost:7129","http://localhost", "http://localhost:4200", "http://localhost:5102", "http://localhost:4200")
                    .AllowAnyMethod()
                    .AllowAnyHeader();
             });
