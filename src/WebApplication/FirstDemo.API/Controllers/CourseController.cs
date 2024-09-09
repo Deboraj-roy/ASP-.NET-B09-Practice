@@ -41,7 +41,8 @@ namespace FirstDemo.API.Controllers
             try
             {
                 var model = _scope.Resolve<ViewCourseRequestHandler>();
-                return await model?.GetCoursesAsync();
+                var ValueTask = await model?.GetCoursesAsync();
+                return ValueTask;
             }
             catch (Exception ex)
             {

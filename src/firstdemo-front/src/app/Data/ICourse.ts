@@ -1,5 +1,6 @@
 export interface ICourse
 {
-	name : string;
+	title : string;
+	description : string;
 	fees : number;
 }
