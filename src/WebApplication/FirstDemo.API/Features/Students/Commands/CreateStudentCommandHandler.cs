@@ -1,11 +1,12 @@
-﻿namespace FirstDemo.API.Features.Students.Commands
+﻿using MediatR;
+
+namespace FirstDemo.API.Features.Students.Commands
 {
-    public class CreateStudentCommandHandler
-    {
-        public void Handle(CreateStudentCommand command)
+    public class CreateStudentCommandHandler : IRequestHandler<CreateStudentCommand>
+    { 
+
+        public Task Handle(CreateStudentCommand request, CancellationToken cancellationToken)
         {
-            //unit of work 
-            //repository access to db
             throw new NotImplementedException();
         }
     }

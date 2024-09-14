@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Serilog.Events;
 using FirstDemo.API;
 using FirstDemo.Infrastructure.Extensions;
+using Microsoft.AspNetCore.Hosting;
 
 var configuration = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
@@ -81,6 +82,10 @@ try
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+    builder.Services.AddMediatR(cfg => {
+        cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+    });
+
 
     var app = builder.Build();
 
